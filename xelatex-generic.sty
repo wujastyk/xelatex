@@ -100,8 +100,12 @@ Mapping=RomDev, %prefer slightly to iast
 
 \usepackage[style=british]{csquotes} % error in log if not included
 
+\usepackage{graphicx}
+
 %\usepackage{marginfix}
-\newcommand{\q}[1]{%
+
+% simple marginal query:
+\newcommand{\q}[1]{% 
     \marginpar{%
 %        \rlap{%
             \fbox{\vtop{\hsize 0.2\textwidth\raggedright\tiny#1}}}}
@@ -117,10 +121,12 @@ shadow,
 backgroundcolor=yellow
 ]{todonotes}      
     \setuptodonotes{fancyline}      
-    \renewcommand{\q}[1]{\todo{#1}}
-\AtEndDocument{\newpage\listoftodos } %print the todo list at the end 
-            
 
+% Now renew the \q command to use \todo:
+\renewcommand{\q}[1]{\todo{#1}}
+\AtEndDocument{\newpage\listoftodos } %print the todo list at the end, when in 
+%draft mode
+            
 %%%%%%%%%%%%%%%%%%%%%%%% \diatop, used for r underdot overbar (ṝ, F6, 246)
 % See Conference Proceedings, TeXniques no. 5, p.11.
 \def\diatop[#1|#2]{\leavevmode{\setbox1=\hbox{{#1{}}}\setbox2=\hbox{{#2{}}}%
@@ -142,7 +148,7 @@ backgroundcolor=yellow
 \providecommand{\Ss}{\emph{Suśruta\-saṃ\-hitā}}
 \let\CS\Cs
 \providecommand{\AH}{\emph{Aṣṭāṅga\-hṛdaya\-saṃ\-hitā}}
-%\newcommand{\saneng}[2]{#2 (\sansk{#1})}
+%\newcommand{\saneng}[2]{#2 (\sansk{#1})} % in xelatex-indexing.sty
 \newcommand{\PYS}{PYŚ} %{Pātañjala\-yoga\-śāstra}
 \newcommand{\YSV}{\sansk{Yogasūtravivaraṇa}}
 \newcommand{\sutra}[1]{\textbf{\large #1}\par}
