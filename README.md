@@ -1,7 +1,7 @@
 # xelatex
 Private xelatex style files
 
-This is simply a place for my private XeLaTeX style files.  This repo contains standard setup macros for the things I always do, plus a few utilities like `\q{}` for marginal queries, etc.  One day, I might even document these macros.
+This is simply a place for my private XeLaTeX packages.  This repo contains standard setup macros for the things I always do, plus a few utilities like `\q{}` for marginal queries, etc.  One day, I might even document these macros.
 
 ## Installation
 Do a `git pull` to fetch these files to your disk.  Place the files in your "local texmf" directory.  To find out what your local texmf directory is, issue this command in a terminal:
