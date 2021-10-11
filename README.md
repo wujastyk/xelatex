@@ -15,3 +15,4 @@ sudo mktexlsr
 For other systems, try `sudo texhash` or similar.  Your TeXlive installation manager also has a button under Actions for doing this (`tlmgr`: "update filename database"; `tlshell`: "regenerate filename database").
 
 That's all, folks!
+-- Dominik Wujastyk, October 2021
