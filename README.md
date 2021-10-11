@@ -14,5 +14,7 @@ sudo mktexlsr
 ```
 For other systems, try `sudo texhash` or similar.  Your TeXlive installation manager also has a button under Actions for doing this (`tlmgr`: "update filename database"; `tlshell`: "regenerate filename database").
 
+These files change in small ways quite often (weekly? monthly?), so do a `git pull` from time to time to get the latest versions.
+
 That's all, folks!
 -- Dominik Wujastyk, October 2021
