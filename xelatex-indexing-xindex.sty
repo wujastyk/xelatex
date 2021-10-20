@@ -74,7 +74,7 @@ othercode=\footnotesize
     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
     \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
 
-% variant that puts the English input first:
+% variant that puts the English input first; of historical interest only:
 \newcommand{\engsan}[2]
 % #2 = Sanskrit
 % #1 = English
@@ -106,8 +106,8 @@ othercode=\footnotesize
     % and now make the index entries:
     %  \index[lex]{\sansk{#1}!#2@#2}%
     %  \index[lex]{#2@#2!\sansk{#1}}}%
-    \index[lexical]{#2!#1@\emph{#1}}%
-    \index[lexical]{#1@\emph{#1}!#2}}
+     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
 %
    \let\sse=\ssaneng
 

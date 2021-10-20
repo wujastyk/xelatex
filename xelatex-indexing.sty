@@ -25,11 +25,11 @@ options = --input-markup xelatex -M iast.xdy -L general,
 %options = --input-markup xelatex -M de-accent
 columns=1]
 
-\indexsetup{ %level=\chapter*,
+\indexsetup{%level=\chapter*,
     noclearpage,
-% firstpagestyle=fancy
-othercode=\footnotesize
-    \newcommand{\lettergroup}[1]{\relax}
+    % firstpagestyle=fancy
+    othercode=\footnotesize
+    \newcommand{\lettergroup}[1]{\relax} % no alphabetical section headers
 }
 
 \newcommand{\saneng}[2]
