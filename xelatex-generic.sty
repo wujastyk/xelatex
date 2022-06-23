@@ -128,14 +128,15 @@ backgroundcolor=yellow
 %at the end, 
 %when in draft mode
             
-%%%%%%%%%%%%%%%%%%%%%%%% \diatop, used for r underdot overbar (ṝ, F6, 246)
+%%%%%%%%%%%%%%%%%%%%%%%% \diatop, by Christina Thiele, 
+% used for r underdot overbar (ṝ, F6, 246)
 % See Conference Proceedings, TeXniques no. 5, p.11.
 \def\diatop[#1|#2]{\leavevmode{\setbox1=\hbox{{#1{}}}\setbox2=\hbox{{#2{}}}%
-    \dimen0=\ifdim\wd1>\wd2\wd1\else\wd2\fi%
-    \dimen1=\ht2\advance\dimen1by-1ex%
-    \setbox1=\hbox to1\dimen0{\hss#1\hss}%
-    \rlap{\raise1\dimen1\box1}%
-    \hbox to1\dimen0{\hss#2\hss}}}%
+        \dimen0=\ifdim\wd1>\wd2\wd1\else\wd2\fi%
+        \dimen1=\ht2\advance\dimen1by-1ex%
+        \setbox1=\hbox to1\dimen0{\hss#1\hss}%
+        \rlap{\raise1\dimen1\box1}%
+        \hbox to1\dimen0{\hss#2\hss}}}%
 %e.g. of use: \diatop[\'|{\=o}] gives u macron acute
 
 % Private abbreviations
