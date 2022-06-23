@@ -19,3 +19,6 @@ These files change in small ways quite often (weekly? monthly?), so do a `git pu
 
 That's all, folks!
 -- Dominik Wujastyk, October 2021
+
+![image](https://user-images.githubusercontent.com/762246/175288825-5290d0dd-751b-4300-922e-deff15a2511f.png)
+
