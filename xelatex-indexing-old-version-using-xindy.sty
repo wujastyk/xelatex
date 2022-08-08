@@ -25,11 +25,11 @@ options = --input-markup xelatex -M iast.xdy -L general,
 %options = --input-markup xelatex -M de-accent
 columns=1]
 
-\indexsetup{ %level=\chapter*,
+\indexsetup{%level=\chapter*,
     noclearpage,
 % firstpagestyle=fancy
 othercode=\footnotesize
-    \newcommand{\lettergroup}[1]{\relax}
+    \newcommand{\lettergroup}[1]{\relax} % no alphabetical section headers
 }
 
 \newcommand{\saneng}[2]
@@ -154,3 +154,24 @@ othercode=\footnotesize
 %  \renewcommand{\baselinestretch}{1.5}
 %  \addtolength{\footnotesep}{0.5\footnotesep}}
 
+%
+% Glossaries
+%
+\usepackage[record]{glossaries-extra}
+\renewcommand{\glossaryname}{Glossary of Medical Substances}
+\GlsXtrLoadResources % input file created by bib2gls
+[% instructions to bib2gls:
+src={~/Dropbox/localtexmf/bibtex/bib/plants}, % terms defined in plants.bib 
+sort={en-GB}% sort according to this locale
+]
+
+\glsaddstoragekey
+{sanskritname}% key/field name
+{\relax }% default value if not explicitly set
+{\glsSanskritName}% custom command to access the value if required
+
+% To index an item say \gls{klītaka}.  Use the sanskrit name as the key 
+% both here and in the plants.bib file. 
+%
+% To print the glossary, say
+% \printunsrtglossaries % plant names.  iterate over all defined entries 
