@@ -25,13 +25,15 @@ options = --input-markup xelatex -M iast.xdy -L general,
 %options = --input-markup xelatex -M de-accent
 columns=1]
 
-\indexsetup{%level=\chapter*,
+\indexsetup{level=\section*,
     noclearpage,
     % firstpagestyle=fancy
     othercode=\footnotesize
     \newcommand{\lettergroup}[1]{\relax} % no alphabetical section headers
 }
 
+% simple command to print the English, put the Skt. 
+% in parentheses, and send both words to a lexical index.
 \newcommand{\saneng}[2]
 % #1 = Sanskrit
 % #2 = English
@@ -46,8 +48,26 @@ columns=1]
     % and now make the index entries:
     %  \index[lex]{\sansk{#1}!#2@#2}%
     %  \index[lex]{#2@#2!\sansk{#1}}}%
-    \index[lexical]{#2!#1@\emph{#1}}%
-    \index[lexical]{#1@\emph{#1}!#2}}
+    \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
+
+% Like \saneng, but only print the English, and send the Sanskrit silently to the index:
+\newcommand{\sanidx}[2]
+% #1 = Sanskrit
+% #2 = English
+{#2%
+    %%{\def\tuck{\kern -.175em }%
+    %%  \def\loweramount{.6ex }%
+    %%  \leavevmode 
+    %%  \lower\loweramount
+    %%  \hbox{\tiny $\llcorner$}\tuck #2 (\sansk{#1})%
+    %%  \raise\loweramount 
+    %%  \hbox{\tuck \tiny $\urcorner$}%
+    % and now make the index entries:
+    %  \index[lex]{\sansk{#1}!#2@#2}%
+    %  \index[lex]{#2@#2!\sansk{#1}}}%
+    \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
 
 % Now a version that prints #1 in Devanagari in the text, but Latin in the index:
 \newcommand{\sanengdev}[2]
@@ -67,7 +87,7 @@ columns=1]
     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
     \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
 
-% variant that puts the English input first:
+% variant that puts the English input first; of historical interest only:
 \newcommand{\engsan}[2]
 % #2 = Sanskrit
 % #1 = English
@@ -86,7 +106,7 @@ columns=1]
     \index[lexical]{#2@\emph{#2}!#1}}
 
 
-\providecommand{\ssaneng}[2]% silent index entry
+\providecommand{\ssaneng}[2]% silent \saneng index entry
 % #1 = Sanskrit
 % #2 = English
 {%#2 (\sansk{#1})%
@@ -100,8 +120,9 @@ columns=1]
     % and now make the index entries:
     %  \index[lex]{\sansk{#1}!#2@#2}%
     %  \index[lex]{#2@#2!\sansk{#1}}}%
-    \index[lexical]{#2!#1@\emph{#1}}%
-    \index[lexical]{#1@\emph{#1}!#2}}
+     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
+%
 
   \let\sse=\ssaneng
   
