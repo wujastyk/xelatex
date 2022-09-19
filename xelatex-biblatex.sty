@@ -82,6 +82,12 @@ mvreference]{useeditor=true,
     {\blx@printbibliography}
     {\blx@printbibliography[]}}
 
+% no ``p.'' or ``pp." in, for example, \verb|\volcite|:
+\DefineBibliographyStrings{english}{%
+    page             = {},
+    pages            = {},
+} 
+
 %\addbibresource
 %%[datatype=bibtex]
 %{biblio4-utf8.bib}
