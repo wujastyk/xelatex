@@ -70,6 +70,11 @@ mvreference]{useeditor=true,
 \AtBeginDocument{\assignrefcontextentries[]{*}}  
 % But this isn't working 2021-05 :-(
 
+% Following sections 3.10 and 4.7.5 of the Bib\LaTeX\ manual, 
+% put the comma \emph{inside} the quotation marks of the title.
+\DefineBibliographyExtras{british}{\DeclareQuotePunctuation{.,}}
+
+
 % To avoid saying \newrefcontext[sorting=nyt] before \printbibliography in every 
 %document redefine \printbibliography (from biblatex.sty):
 
