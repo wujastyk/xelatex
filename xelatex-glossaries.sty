@@ -1,0 +1,26 @@
+%
+% Glossaries
+%
+\usepackage[record,
+    stylemods=bookindex, % this and next to get 2 cols
+    style=bookindex]{glossaries-extra}
+%
+% glossaries manual p. 68, mantra to get the full entry, with description:
+\renewcommand*{\glsxtrbookindexname}[1]{
+    \glossentryname{#1}%
+    \space (\emph{\the\glslabeltok{#1}})%
+    \ifglshasdesc{#1}{\space \glossentrydesc{#1}\glspostdescription}{}%
+}
+\renewcommand{\glossaryname}{Glossary and Index of Medical Substances}
+\GlsXtrLoadResources % input file created by bib2gls
+[% instructions to bib2gls:
+src={~/Dropbox/localtexmf/bibtex/bib/plants}, % terms are defined in plants.bib 
+sort={en-GB}, % sort according to this locale
+]
+
+% Usage:
+% To index an item say \gls{klītaka}.  Use the sanskrit name as the label 
+% both here and in the plants.bib file. 
+%
+% To print the glossary, say
+% \printunsrtglossaries % plant names.  iterate over all defined entries 
