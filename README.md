@@ -14,6 +14,10 @@ sudo mktexlsr
 ```
 For other systems, try `sudo texhash` or similar.  Your TeXlive installation manager also has a button under Actions for doing this (`tlmgr`: "update filename database"; `tlshell`: "regenerate filename database").
 
+## xelatex-glossaries
+
+There is separate documentation for this file at my blog, [Cikitsā](https://cikitsa.blogspot.com/2022/11/making-index-of-plant-names.html).
+
 ## Updates
 These files change in small ways quite often (weekly? monthly?), so do a `git pull` from time to time to get the latest versions.
 
