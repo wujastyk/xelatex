@@ -91,6 +91,7 @@ mvreference]{useeditor=true,
 \DefineBibliographyStrings{english}{%
     page             = {},
     pages            = {},
+    volume     		= {v.},
 } 
 
 %\addbibresource
@@ -107,7 +108,7 @@ mvreference]{useeditor=true,
 %
 \DeclareFieldFormat{url}{%
     \ifhyperref
-    {\textsc{url: }\href{#1}{#1}}
+    {\\ \textsc{url: }\href{#1}{#1}} % added a newline to help with long URLs in PDFs
     {\textsc{url: }\nolinkurl{#1}}} %DW bug here
 %
 % Buddhist Digital Resource Center:
