@@ -57,6 +57,7 @@ mvreference]{useeditor=true,
 %    uniquename=full
 }
 
+
 %%% patch of Sept 2019 
 %%%https://mail.google.com/mail/u/0/#inbox/FMfcgxwDrHpMnGSkkqjMqHwCCdJqBLkC
 %%%\makeatletter
@@ -231,6 +232,13 @@ mvreference]{useeditor=true,
     page             = {},
     pages            = {},
 } 
+
+% Create a new data type in bibtex, @literal, which just prints the 
+% content of the title field. 
+\DeclareBibliographyDriver{literal}{%
+    \newunit\newblock
+    \printfield{title}%
+    \finentry}
 
 \endinput
 
