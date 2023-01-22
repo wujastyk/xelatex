@@ -27,13 +27,13 @@ title=Index of Manuscripts,
 %options = --input-markup xelatex -M iast.xdy -L general,
 %options = --input-markup xelatex -M de-accent
 options = -c iast -a -n, % nocasesensitive, noheadings
-columns=2,
+columns=1,
 intoc]
 
-\indexsetup{level=\section*,
+\indexsetup{level=\chapter*,
     noclearpage,
 % firstpagestyle=fancy
-othercode=\footnotesize
+othercode= %\footnotesize
     \newcommand{\lettergroup}[1]{\relax}
 }
 
@@ -179,4 +179,4 @@ othercode=\footnotesize
 %  \addtolength{\footnotesep}{0.5\footnotesep}}
 
 %
-\input xelatex.glossaries.sty
+\usepackage{xelatex-glossaries}
