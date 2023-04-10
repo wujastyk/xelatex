@@ -77,6 +77,13 @@ Mapping=RomDev, %prefer slightly to iast
 \let\dsan=\devanagarifont
 \let\dn=\devanagarifont
 
+\setotherlanguage{bengali}
+\newfontfamily\bengalifont
+[Script=Bengali]
+%{Sahadeva}
+{Noto Serif Bengali}
+% Use: \textbengali{বান মাছ}
+
 % and
 \setotherlanguage{german}
 \setotherlanguage{french}
@@ -243,18 +250,24 @@ backgroundcolor=yellow
 %  \vskip 3em} %DW  was 1.5em
 
 % See http://cs.wlu.edu/~necaise/refs/latex2e/env-list.4.html
-\newenvironment{sloka} % based on {verse}, from book.cls
-               {\let\\\@centercr
-                \list{}{\itemsep  \z@
-                        \topsep .1\baselineskip
-                        \parsep .25\baselineskip
-                        \itemindent   -1.5em%
-                        \listparindent\itemindent
-                        \rightmargin  \z@
-                        \leftmargin 3pc % = CUP's \SFB@indent
-                        \advance\leftmargin 1.5em}%
-               \item\itshape\relax}
-               {\endlist}
+%\newenvironment{sloka} % based on {verse}, from book.cls
+%               {\let\\\@centercr
+%                \list{}{\itemsep  \z@
+%                        \topsep .1\baselineskip
+%                        \parsep .25\baselineskip
+%                        \itemindent   -1.5em%
+%                        \listparindent\itemindent
+%                        \rightmargin  \z@
+%                        \leftmargin 3pc % = CUP's \SFB@indent
+%                        \advance\leftmargin 1.5em}%
+%               \item\itshape\relax}
+%               {\endlist}
+               
+% Here's another version from book.cls, based on {quote}
+   \newenvironment{sloka}          
+   {\list{}{\rightmargin\leftmargin}%
+    \item\itshape\relax}
+{\endlist}               
 %
 
 % Preliminary numberless "footnote" for abbreviations,

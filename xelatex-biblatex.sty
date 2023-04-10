@@ -167,9 +167,9 @@ mvreference]{useeditor=true,
 \fi
 \BibHiddenURLsfalse
 
-\defcitealias{meul-hist}{HIML}
-\defcitealias{ncc}{NCC}
-\defcitealias{bisw-bibl}{BSIMC}
+%\defcitealias{meul-hist}{HIML}
+%\defcitealias{ncc}{NCC}
+%\defcitealias{bisw-bibl}{BSIMC}
 
 % to make bibtex notes print last, like addendums
 % from http://tex.stackexchange.com/
@@ -265,6 +265,26 @@ mvreference]{useeditor=true,
 %\makeatother %%% if in document file
 
 \endinput
+% \section{Some alternate ways of dealing with the shorthands}
+
+d}
+%        \name{sortname}\name{author}\name{editor}\name{translator}
+%        \field{sorttitle}\field{title}}
+%    \sort{\field{sortyear}\field{year}}
+%    \sort{\field{sorttitle}\field{title}}
+%    \sort{%
+%        \field[padside=left,padwidth=4,padchar=0]{volume}
+%        \literal{0000}}}
+
+% Make a list of Abbreviations using shorttitles and that refer to main entries    
+\DeclareBibliographyDriver{shorthand}{%
+%\printfield{shorttitle}%
+\citetitle{\thefield{entrykey}}\newunit\newblock 
+\citeauthor{\thefield{entrykey}}\newunit\newblock
+\citeyear{\thefield{entrykey}}
+}
+
+% \section{Pubstate tweaks}
 
 %% redefinition from  bbx/standard.bbx to stop pubstate printing after an addendum
 %\renewbibmacro*{addendum+pubstate}{%
