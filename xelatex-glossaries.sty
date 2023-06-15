@@ -1,25 +1,37 @@
 %
 % Glossaries
 %
-\usepackage[record,
-    nostyles,
-    stylemods=bookindex,
-    style=bookindex,
-    postpunc={\,:\ }]
-    {glossaries-extra}
-% 
-% glossaries manual p. 68, mantra to get the full entry, with description:
+%\usepackage[record=only,
+%    nostyles,
+%    stylemods={longragged,mcols},
+%    style=mcolindex,
+%    postpunc={\,:\ }
+%    ]
+%    {glossaries-extra}
+%\renewcommand*{\glsnamefont}[1]{\textnormal{#1}}
+%
+\usepackage[record=only,
+nostyles,
+style=bookindex,
+stylemods=bookindex,
+postpunc={\,:\ }
+]
+{glossaries-extra}
+
+% glossaries-extra.pdf manual, section 8.7.1, p.445:
 \renewcommand*{\glsxtrbookindexname}[1]{
     \glossentryname{#1}%
     \space (\emph{\the\glslabeltok{#1}})%
     \ifglshasdesc{#1}{\space \glossentrydesc{#1}\glspostdescription}{}%
 }
-%
-%\renewcommand*\glspostdescription{XXX }
+% glossaries-extra.pdf manual, section 8.7.1, p.446; get rid of that pesky 
+%pre-comma:
+\renewcommand*\glsxtrbookindexprelocation[1]{\empty }
 %
 \renewcommand{\glossaryname}{Glossary and Index of Medical Substances}
-\setglossarypreamble{\vspace{-\baselineskip}\emph{\small Figures after the 
-        final colon are page number references in the present book.}\bigskip}  
+\setglossarypreamble{\emph{\footnotesize 
+            Numbers after the final colon refer to 
+            pages in this book.}\bigskip}  
 \GlsXtrLoadResources % input file created by bib2gls
 [% instructions to bib2gls:
 %selection=all, % print everything

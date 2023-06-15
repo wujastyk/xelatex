@@ -31,7 +31,7 @@ columns=1,
 intoc]
 
 \indexsetup{level=\section*,
-    noclearpage,
+%    noclearpage,
 % firstpagestyle=fancy
 othercode= %\footnotesize
     \newcommand{\lettergroup}[1]{\relax}
@@ -135,7 +135,7 @@ othercode= %\footnotesize
 %
 %\usepackage{index,amssymb}
 %\newindex{lex}{ldx}{lnd}{Lexical Index}
-\makeatletter
+%\makeatletter
 \renewcommand\@idxitem{\par\hangindent 15\p@ }% from sanmed.sty
 %\newcommand\skt[2]{#1%\footnote{#1: Skt. \emph{#2}}%
 %% #1 = English 
@@ -143,7 +143,7 @@ othercode= %\footnotesize
 %% next lines experimental
 %  \index[skt]{#1!#2@\emph{#2}}%
 %  \index[skt]{#2@\emph{#2}!#1}}
-\makeatother
+%\makeatother
 
 % test version of \saneng that puts tick marks around the indexed words.
 %\newcommand{\saneng}[2]
@@ -173,9 +173,6 @@ othercode= %\footnotesize
 \newcommand{\MSsilent}[1]{\index[manuscripts]{#1}} 
     \let\MSnocite=\MSsilent
     
-
 %\renewcommand{\doublespacing}{%
 %  \renewcommand{\baselinestretch}{1.5}
 %  \addtolength{\footnotesep}{0.5\footnotesep}}
-
-
