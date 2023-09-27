@@ -66,11 +66,12 @@
 % input using standard IAST transliteration
 \newfontfamily\devanagarifont
 [Script=Devanagari,
-FakeStretch=1.05,
+%FakeStretch=1.05,
 Mapping=RomDev, %prefer slightly to iast
 ]
 %{Sahadeva}
-{Sanskrit  2003}
+%{Sanskrit  2003}
+{Tiro Devanagari Sanskrit}
 
 %\newcommand{\dev}[1]{\textdevanagari{#1}} % test this 2018-10
 \newcommand{\dev}[1]{\textsanskrit{\devanagarifont #1}} % test this 2020-01
@@ -112,11 +113,11 @@ Mapping=RomDev, %prefer slightly to iast
 %\usepackage{marginfix}
 
 % simple marginal query:
-\newcommand{\q}[1]{% 
-    \marginpar{%
-%        \rlap{%
-            \fbox{\vtop{\hsize 0.2\textwidth\raggedright\tiny#1}}}}
-            %}
+%\newcommand{\q}[1]{% 
+%    \marginpar{%
+%%        \rlap{%
+%            \fbox{\vtop{\hsize 0.2\textwidth\raggedright\tiny#1}}}}
+%            %}
 % Actually, todonotes makes nicer marginal comments:
 \usepackage[colorinlistoftodos,
 %    disable,
@@ -130,7 +131,7 @@ backgroundcolor=yellow
     \setuptodonotes{fancyline}      
 
 % Now renew the \q command to use \todo:
-\renewcommand{\q}[1]{\todo{#1}}
+\newcommand{\q}[1]{\todo{#1}}
 %\AtEndDocument{\newpage\listoftodos } %print the todo list 
 %at the end, 
 %when in draft mode
