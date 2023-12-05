@@ -16,7 +16,7 @@ postpunc={\,:\ }
     \ifglshasdesc{#1}{\space \glossentrydesc{#1}\glspostdescription}{}%
 }
 % glossaries-extra.pdf manual, section 8.7.1, p.446; get rid of that pesky 
-%pre-comma:
+% pre-comma:
 \renewcommand*\glsxtrbookindexprelocation[1]{\empty }
 %
 \renewcommand{\glossaryname}{Glossary and Index of Medical Substances}
@@ -24,9 +24,8 @@ postpunc={\,:\ }
             Numbers after the final colon refer to 
             pages in this book.}\bigskip}  
 %
-\GlsXtrLoadResources % input file created by bib2gls
-[% instructions to bib2gls:
-%selection=all, % print everything
+\GlsXtrLoadResources[% instructions to bib2gls:
+selection=all, % print everything; bib2gls manual, section 5.4
 src={~/Dropbox/localtexmf/bibtex/bib/plants}, % terms are defined in plants.bib 
 sort={en-GB}, % sort according to this locale
 ]

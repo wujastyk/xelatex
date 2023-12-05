@@ -1,17 +1,19 @@
 % Formerly used xindy; now updated to use xindex
 %
-\usepackage[imakeidx]{xindex} 
-%useful if there are multiple indexes, and 
+%\usepackage[imakeidx]{xindex} % deprecated by indextools
+\usepackage[xindex]{indextools}
+% This is useful if there are multiple indexes, and 
 % to make indexing happen during a normal XeTeX run.
 % see https://cikitsa.blogspot.ca/2016/07/getting-xindy-to-work-for-iast-encoded.html
 %
+% This should be loaded \emph{before} \verb|hyperref|.
 
 % A lexical index that sorts words with diacritical marks. I use this with
 % \saneng{}{} to make indexes and reverse indexes of Sanskrit terms.
 
 \makeindex[name=lexical,
 title=Glossary,
-columns=3,
+columns=2,
 %options= --input-markup xelatex -M iast.xdy -L general,
 %options = --input-markup xelatex -M de-accent
 options=  -c iast -a -n, % nocasesensitive, noheadings
@@ -42,7 +44,7 @@ othercode= %\footnotesize
 \newcommand{\saneng}[2]
 % #1 = Sanskrit
 % #2 = English
-{#2 (\sansk{#1})%
+{#2 (\emph{#1})%
     %%{\def\tuck{\kern -.175em }%
     %%  \def\loweramount{.6ex }%
     %%  \leavevmode 
@@ -53,8 +55,15 @@ othercode= %\footnotesize
     % and now make the index entries:
     %  \index[lex]{\sansk{#1}!#2@#2}%
     %  \index[lex]{#2@#2!\sansk{#1}}}%
-    \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
-    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
+%  
+% Version with glosses as sub-items:
+%    \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+%    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}
+%
+% Version with glosses on the same line in parens:
+    \index[lexical]{#2@\MakeLowercase{#2 (\emph{#1})}}%
+    \index[lexical]{#1@\MakeLowercase{\emph{#1} (#2)}}%
+    }
 
 % Like \saneng, but only print the English, and send the Sanskrit silently to the index:
 \newcommand{\sanidx}[2]
@@ -89,8 +98,17 @@ othercode= %\footnotesize
     % and now make the index entries:
     %  \index[lex]{\sansk{#1}!#2@#2}%
     %  \index[lex]{#2@#2!\sansk{#1}}}%
-    \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
-    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
+%
+% Version with glosses as sub-items:
+%    \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+%    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}
+%
+% Version with glosses on the same line in parens:
+    \index[lexical]{#2@\MakeLowercase{#2 (\emph{#1})}}%
+    \index[lexical]{#1@\MakeLowercase{\emph{#1} (#2)}}%
+    }
+%
+
 
 % variant that puts the English input first; of historical interest only:
 \newcommand{\engsan}[2]
@@ -124,8 +142,15 @@ othercode= %\footnotesize
     % and now make the index entries:
     %  \index[lex]{\sansk{#1}!#2@#2}%
     %  \index[lex]{#2@#2!\sansk{#1}}}%
-     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
-    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
+%
+% Version with glosses as sub-items:
+%     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+%    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}
+%
+% Version with glosses on the same line in parens:
+    \index[lexical]{#2@\MakeLowercase{#2 (\emph{#1})}}%
+    \index[lexical]{#1@\MakeLowercase{\emph{#1} (#2)}}%
+    }
 %
    \let\sse=\ssaneng
 

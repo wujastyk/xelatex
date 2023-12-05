@@ -1,22 +1,43 @@
-% 2016-04-01
-% XeLaTeX stuff:
+% This file started to look like this in about 2016-04-01
+% \section{XeLaTeX stuff}
 % Normalize any residual Unicode combining accents,
 % and write out error messages, if any:
 %
+%  \begin{macro}{XeLaTeX internals}
+%    \begin{macrocode}
 \XeTeXinputnormalization=1
 \tracinglostchars=1
 \tracingonline=1 
 \XeTeXgenerateactualtext=1 
+%    \end{macrocode}
+%  \end{macro}
 
+% \section{Used at different times}
+% Commented out.
+%  \begin{macro}{hyperref,pdfx}
+%    \begin{macrocode}
 %\usepackage[final=true]{hyperref}
-
 %\usepackage[a-1b]{pdfx} % get an archival PDF
+%    \end{macrocode}
+%  \end{macro}
 
+% \section{Multilingual macros}
 % from:
-%http://tex.stackexchange.com/questions/38607/no-room-for-a-new-dimen/38609#38609
+%\href{http://tex.stackexchange.com/questions/38607/no-room-for-a-new-dimen/38609#38609}
+%{Stackexchange}.
+%
+%  \begin{macro}{etex}
+% Not used
+%    \begin{macrocode}
 %\usepackage{etex}
 %\reserveinserts{28}
 %\usepackage{xcolor}
+%    \end{macrocode}
+%  \end{macro}
+%
+%  \begin{macro}{polyglossia}
+% Set up various fonts  and languages.
+%    \begin{macrocode}
 \usepackage{polyglossia} 
 \defaultfontfeatures{%
   Mapping=tex-text,
@@ -26,54 +47,72 @@
 } % not Harfbuzz yet
 
 \setmainlanguage[variant=british]{english}
+%    \end{macrocode}
 
-%\setmainfont[AutoFakeBold=1.5]{EB Garamond 12}
+% Main document font:
+%    \begin{macrocode}
+% \setmainfont[AutoFakeBold=1.5]{EB Garamond 12}
 \setmainfont%[BoldFont = * Bold] % tlpretest 2019 
-%https://tug.org/pipermail/tex-live/2019-March/043211.html
-%{Linux Libertine O} % lovely, but use Libertinus
-%{fbb} % also lovely - Bembo, but no underdot
-%{Tinos} % a croscore font; good diacritics
+% (See https://tug.org/pipermail/tex-live/2019-March/043211.html)
+% {Linux Libertine O} % lovely, but use Libertinus
+% {fbb} % also lovely - Bembo, but no underdot
+% {Tinos} % a croscore font; good diacritics
 {TeX Gyre Pagella}
-%{IndUni-P}
-%{Lucida Sans Unicode}
-%{Libertinus Serif} % something funny with overlapping chars in bold 2019-05
+% {IndUni-P}
+% {Lucida Sans Unicode}
+% {Libertinus Serif} % something funny with overlapping chars in bold 2019-05
+%    \end{macrocode}
 
+% \section{}Packages that Polyglossia now auto-loads}
+% polyglossia automatically loads: fixltx2e, etex, xunicode, fontspec.  
+% But we still need \verb|xltxtra| for the definitions of logos like \verb|\XeLaTeX|.
+%    \begin{macrocode}
+\usepackage{xltxtra}
+% \usepackage{xunicode} % get unicode encoding in PDF even when using
+% \= etc.  Not needed at present.
+%    \end{macrocode}
 
-% polyglossia automatically loads: fixltx2e, etex, xunicode, fontspec.  (So does xltxtra.)
-%\usepackage{xunicode} % get unicode encoding in PDF even when using
-% \= etc.
-
-% getting properly-hyphenated Sanskrit:
+% Getting properly-hyphenated Sanskrit:
 %
+%    \begin{macrocode}
 \setotherlanguage{sanskrit}  % for transliterated Sanskrit
 \newfontfamily\sanskritfont
 [Script=Latin]
-%[Script=Devanagari]
-%{Linux Libertine O}  %Transliteration only in this font
+% [Script=Devanagari]
+% {Linux Libertine O}  %Transliteration only in this font
 {TeX Gyre Pagella}  %Transliteration only in this font
-%{IndUni-P} %Transliteration only in this font
-%{Brill} %Transliteration only in this font
-%{Sanskrit 2003} % Roman and Devanagari
+% {IndUni-P} %Transliteration only in this font
+% {Brill} %Transliteration only in this font
+% {Sanskrit 2003} % Roman and Devanagari
+%    \end{macrocode}
 
 
-% Define \sansk{} which is the same as \emph{}, except that it causes appropriate hyphenation
-% for Sanskrit words.  Use \sansk{} for Sanskrit and \emph{} for English.
+% Define \verb|\sansk{}| which is the same as \verb|\emph{}|, except that it 
+% causes 
+% appropriate hyphenation
+% for Sanskrit words.  Use \verb|\sansk{}| for Sanskrit and \verb|\emph{}| for 
+% English.
+%    \begin{macrocode}
 \newcommand{\sansk}[1]{\emph{\textsanskrit{#1}}}
 \let\iast=\sansk %better name for it
 \let\rsan=\sansk
+%    \end{macrocode}
 
 % Now define the Devanagari font:
 % input using standard IAST transliteration
+%    \begin{macrocode}
 \newfontfamily\devanagarifont
 [Script=Devanagari,
-%FakeStretch=1.05,
+% FakeStretch=1.05,
 Mapping=RomDev, %prefer slightly to iast
 ]
-%{Sahadeva}
-%{Sanskrit  2003}
+% {Sahadeva}
+% {Sanskrit  2003}
 {Tiro Devanagari Sanskrit}
+%    \end{macrocode}
 
-%\newcommand{\dev}[1]{\textdevanagari{#1}} % test this 2018-10
+%    \begin{macrocode}
+% \newcommand{\dev}[1]{\textdevanagari{#1}} % test this 2018-10
 \newcommand{\dev}[1]{\textsanskrit{\devanagarifont #1}} % test this 2020-01
 \let\dsan=\devanagarifont
 \let\dn=\devanagarifont
@@ -81,44 +120,81 @@ Mapping=RomDev, %prefer slightly to iast
 \setotherlanguage{bengali}
 \newfontfamily\bengalifont
 [Script=Bengali]
-%{Sahadeva}
+% {Sahadeva}
 {Noto Serif Bengali}
-% Use: \textbengali{বান মাছ}
+%    \end{macrocode}
+% Use: \verb|\textbengali{বান মাছ}|
 
-% and
+% And other languages
+%
+%    \begin{macrocode}
 \setotherlanguage{german}
 \setotherlanguage{french}
+%    \end{macrocode}
 % will call appropriate hyphenation.
 
+% Chinese, Japanese, Korean
+%    \begin{macrocode}
 \newfontfamily\cjkfont{Noto Sans CJK SC} %
-%[Script=CJK,Mapping=tex-text,Scale=MatchLowercase]
-%{IPAexMincho}
-%{TakaoPGothic}
+% [Script=CJK,Mapping=tex-text,Scale=MatchLowercase]
+% {IPAexMincho}
+% {TakaoPGothic}
 \let\cjk\cjkfont
-
-%https://tex.stackexchange.com/questions/376420/include-chinese-characters-into-article-in-xelatex
-
+%    \end{macrocode}
+%\url{https://tex.stackexchange.com/questions/376420/include-chinese-characters-into-article-in-xelatex}
+%
+% Classical Greek:
+%    \begin{macrocode}
 \setotherlanguage{greek}
 \newfontfamily\greekfont[Script=Greek,Mapping=tex-text]{GFS Didot}
 %{GFS Porson}
 %{GFS Philostratos}
+%    \end{macrocode}
 %
+%  \end{macro} 
+% End of polyglossia stuff.
 
+% \section{Sanskrit hyphenation}
+%  \begin{macro}{hyphenations}
+%  A cumulative hyphenation exception file, \verb|sanskrit-hyphenations.tex|,
+%  adds numerous hand-tuned hyphenation points to the default Polyglossia 
+% hyphenation
+% rules for Sanskrit.  This file needs to be \verb|\input| after the start of the 
+% document.  Normally, we'd do this with \verb|\AtBeginDocument|, but
+% for obscure reasons, that doesn't work.  So we have to add the \verb|\input|
+% statement by hand at the start of every document, immediately after
+% \verb|\begin{document}|.  
+%    \begin{macrocode}
 %\AtBeginDocument{\input{sanskrit-hyphenations.tex}} % this doesn't work :-(
+%    \end{macrocode}
+%  \end{macro}
 
+% \section{Misc.}
+%  \begin{macro}{csquotes,graphicx}
+%    \begin{macrocode}
 \usepackage[style=british]{csquotes} % error in log if not included
-
 \usepackage{graphicx}
+%    \end{macrocode}
+%  \end{macro}
 
-%\usepackage{marginfix}
+% \section{Marginal note hacks}
+% Not used:
+%    \begin{macrocode}
+% \usepackage{marginfix}
+%    \end{macrocode}
 
-% simple marginal query:
-%\newcommand{\q}[1]{% 
+% simple marginal query, now superseded:
+%    \begin{macrocode}
+% \newcommand{\q}[1]{% 
 %    \marginpar{%
 %%        \rlap{%
 %            \fbox{\vtop{\hsize 0.2\textwidth\raggedright\tiny#1}}}}
 %            %}
-% Actually, todonotes makes nicer marginal comments:
+%    \end{macrocode}
+%
+% Actually, \verb|todonotes| makes nicer marginal comments:
+%  \begin{macro}{todonotes}
+%    \begin{macrocode}
 \usepackage[colorinlistoftodos,
 %    disable,
 textsize=tiny,
@@ -132,42 +208,54 @@ backgroundcolor=yellow
 
 % Now renew the \q command to use \todo:
 \newcommand{\q}[1]{\todo{#1}}
-%\AtEndDocument{\newpage\listoftodos } %print the todo list 
-%at the end, 
-%when in draft mode
+% \AtEndDocument{\newpage\listoftodos } %print the todo list 
+% at the end, 
+% when in draft mode
+%    \end{macrocode}
+%  \end{macro}
             
-%%%%%%%%%%%%%%%%%%%%%%%% \diatop, by Christina Thiele, 
+% \section{Stacked diacritics}
+%  \begin{macro}{\diatop}
+%%%% \verb|\diatop|, by Christina Thiele, 
 % used for r underdot overbar (ṝ, F6, 246)
 % See Conference Proceedings, TeXniques no. 5, p.11.
+%    \begin{macrocode}
 \def\diatop[#1|#2]{\leavevmode{\setbox1=\hbox{{#1{}}}\setbox2=\hbox{{#2{}}}%
         \dimen0=\ifdim\wd1>\wd2\wd1\else\wd2\fi%
         \dimen1=\ht2\advance\dimen1by-1ex%
         \setbox1=\hbox to1\dimen0{\hss#1\hss}%
         \rlap{\raise1\dimen1\box1}%
         \hbox to1\dimen0{\hss#2\hss}}}%
-%e.g. of use: \diatop[\'|{\=o}] gives u macron acute
+%    \end{macrocode}
+% E.g. of use: \verb|\diatop[\'|{\=o}]| gives u macron acute
+%  \end{macro}
 
-% Private abbreviations
+% \section{Private abbreviations}
+%  \begin{macro}{\AD, etc.}
+%    \begin{macrocode}
 \newcommand{\AD}{\textsc{ce}{}}
 \newcommand{\BC}{\textsc{bce}{}}
-%\newcommand{\AD}{\textsc{ad}{}}    % traditional and non-PC
-%\newcommand{\BC}{\textsc{bc}{}}
 \newcommand{\BCE}{\textsc{bce}{}}
 \newcommand{\CE}{\textsc{ce}{}}
 \providecommand{\Cs}{\emph{Caraka\-saṃ\-hitā}}
 \providecommand{\Ss}{\emph{Suśruta\-saṃ\-hitā}}
 \let\CS\Cs 
-
 \let\SS\Ss
 \providecommand{\AH}{\emph{Aṣṭāṅga\-hṛdaya\-saṃ\-hitā}}
-%\newcommand{\saneng}[2]{#2 (\sansk{#1})} % in xelatex-indexing.sty
+% \newcommand{\saneng}[2]{#2 (\sansk{#1})} % now in 
+% xelatex-indexing-xindex.sty
 \newcommand{\PYS}{PYŚ} %{Pātañjala\-yoga\-śāstra}
 \newcommand{\YSV}{\sansk{Yogasūtravivaraṇa}}
 \newcommand{\sutra}[1]{\textbf{\large #1}\par}
+%    \end{macrocode}
+%  \end{macro}
 
-% nice hanging-indent footnotes.  LaTeX Companion, p.73:
-%\def\hangfootnotes{%
-%\renewcommand{\@makefntext}[1]{\setlength{\parindent}{0pt}%
+% \section{Nice hanging-indent footnotes}
+%  \begin{macro}{\hangfootnotes}
+% LaTeX Companion, p.73.  Not used.
+%    \begin{macrocode}
+% \def\hangfootnotes{%
+% \renewcommand{\@makefntext}[1]{\setlength{\parindent}{0pt}%
 %  \begin{list}{}{\setlength{\labelwidth}{1.5em}%
 %    \setlength{\leftmargin}{\labelwidth}%
 %    \setlength{\labelsep}{3pt}\setlength{\itemsep}{0pt}%
@@ -175,34 +263,48 @@ backgroundcolor=yellow
 %    \footnotesize}\item[\hfill\@makefnmark]##1%
 %  \end{list}}%
 %}
+%    \end{macrocode}
 
 % But the above is broken by bigfoot (too much vertical space)
 
-% footnotes with hanging indents
+% Footnotes with hanging indents
 % adapted from
-% http://www.ceus-now.com/raggedright-in-footnotes-with-hanging-indent/
+% \url{http://www.ceus-now.com/raggedright-in-footnotes-with-hanging-indent/}
 %
+%    \begin{macrocode}
 \newcommand\hangfootnotes{%
     \long\def\@makefntext##1{\leftskip=1.8em\hskip-1.8em\hb@xt@1.8em
     {\@thefnmark\hss}##1}}
+%    \end{macrocode}
+%  \end{macro}
 
-% Normal LaTeX stuff now:
+% \section{Normal LaTeX settings now}
 %
+%    \begin{macrocode}
 \setcounter{secnumdepth}{0}
+%    \end{macrocode}
 %
+%  \begin{macro}{enumitem}
+%    \begin{macrocode}
 \usepackage[inline]{enumitem} 		% supersedes mdwlist: does it globally
  \setlist{itemsep=.5em,
      %labelindent=\parindent,
      %leftmargin=*,
  }
+%    \end{macrocode}
+%  \end{macro}
 %
-%\usepackage{makeidx} % leave this to xelatex-indexing.sty
+%    \begin{macrocode}
+% \usepackage{makeidx} % leave this to xelatex-indexing.sty
+%    \end{macrocode}
+%  \begin{environment}{multicol,longtable,array}
+%    \begin{macrocode}
 \usepackage{multicol}
 % \multicolsep = 12pt plus 4pt minus 3pt % default
 \multicolsep = 1pt plus .25ex % like the starred environments
 \usepackage{longtable}
 \usepackage{array}
-%\usepackage{index}              % multiple indexes. Doesn't play well with Beamer
+% \usepackage{index}    % multiple indexes. Doesn't play well with Beamer
 \widowpenalty 4000
 \clubpenalty 300
 \brokenpenalty 5000
@@ -210,28 +312,40 @@ backgroundcolor=yellow
 \vfuzz2pt % Don't report over-full v-boxes if over-edge is small
 \hfuzz2pt % Don't report over-full h-boxes if over-edge is small
 \emergencystretch .1\textwidth
+%    \end{macrocode}
 %
+%  \end{environment}
+%    \begin{macrocode}
 \hyphenation{dharam-pal wuj-as-tyk never-the-less nutri-tive
   asoka kerala Aristotle Alex-ander Majno manu-script manu-scripts}
+%    \end{macrocode}
 
 % Command to draw a box where the pictures will go:
+%    \begin{macrocode}
 \newcommand{\pretendpicture}
   {{\centering \fbox{\vrule width0pt height 2.5in depth0pt
      \vrule width 4in height0pt depth0pt }\par }}
+%    \end{macrocode}
 % use as follows:
-%\begin{figure}[htp]
-%\begin{center}
+% \begin{verbatim}
+% \begin{figure}[htp]
+% \begin{center}
 %  \pretendpicture
-%\end{center}
-%\caption{}
-%\label{fig: }
-%\end{figure}
+% \end{center}
+% \caption{}
+% \label{fig: }
+% \end{figure}
+%  \end{verbatim}
 
-%% from article.cls
-%\typeout{Wujastyk: NB: Modified maketitle command, flush
-%left and no array for authors.}
+% \section{From article.cls}
+% This isn't used.
+%    \begin{macrocode}
+% \typeout{Wujastyk: NB: Modified maketitle command, flush
+% left and no array for authors.}
+%    \end{macrocode}
 %
-%\providecommand\@maketitle{%
+%    \begin{macrocode}
+% \providecommand\@maketitle{%
 %  \newpage
 %  \null
 %  \vskip 2em%
@@ -251,9 +365,12 @@ backgroundcolor=yellow
 %%  \end{center}%
 %  \par
 %  \vskip 3em} %DW  was 1.5em
+%    \end{macrocode}
 
-% See http://cs.wlu.edu/~necaise/refs/latex2e/env-list.4.html
-%\newenvironment{sloka} % based on {verse}, from book.cls
+% See \url{http://cs.wlu.edu/~necaise/refs/latex2e/env-list.4.html}
+% Not used:
+%    \begin{macrocode}
+% \newenvironment{sloka} % based on {verse}, from book.cls
 %               {\let\\\@centercr
 %                \list{}{\itemsep  \z@
 %                        \topsep .1\baselineskip
@@ -265,24 +382,37 @@ backgroundcolor=yellow
 %                        \advance\leftmargin 1.5em}%
 %               \item\itshape\relax}
 %               {\endlist}
+%    \end{macrocode}
                
 % Here's another version from book.cls, based on {quote}
+%    \begin{macrocode}
    \newenvironment{sloka}          
    {\list{}{\rightmargin\leftmargin}%
     \item\itshape\relax}
 {\endlist}               
+%    \end{macrocode}
 %
 
+%  \begin{macro}{\PreliminaryNote}
 % Preliminary numberless "footnote" for abbreviations,
 % grant references, and other general initial statements.
+%    \begin{macrocode}
 \newcommand{\PreliminaryNote}[1]{%
 {\def\thefootnote{\relax }%
  \footnotetext{\hspace*{-2.3em} %only if not using \hangfootnotes
   #1}}}
+%    \end{macrocode}
+%  \end{macro}
 %
+%    \begin{macrocode}
 \newcommand{\doublespacing}{%
   \renewcommand{\baselinestretch}{1.5}
   \addtolength{\footnotesep}{0.5\footnotesep}}
-%\usepackage{cclicenses}
-%\let\DWolddate\date
-%\renewcommand{\date}[1]{\DWolddate{#1\\ \cc \ccby \ccnc \ccsa }}
+%    \end{macrocode}
+%
+% The following not used.
+%    \begin{macrocode}
+% \usepackage{cclicenses}
+% \let\DWolddate\date
+% \renewcommand{\date}[1]{\DWolddate{#1\\ \cc \ccby \ccnc \ccsa }}
+%    \end{macrocode}
