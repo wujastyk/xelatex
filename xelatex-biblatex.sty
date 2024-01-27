@@ -1,9 +1,13 @@
-% Biblatex:
+% \section{Bib\LaTeX\ }
+%    \begin{macro}{BibLaTeX}
+%  Load the Bib\LaTeX\ package and
+% the \verb|oxyear| style, and set the various options.
+%    \begin{macrocode}
 \usepackage[%
 backend=biber,
 %style=authoryear-icomp,
 % Make idem and ibidem behave appropriately:
-%https://tex.stackexchange.com/questions/61717/biblatex-strictly-identical-footnote-citations-following-each-other
+%\url{https://tex.stackexchange.com/questions/61717/biblatex-strictly-identical-footnote-citations-following-each-other}
 % (and see \newbibmacro*{cite:ibid} below).
 %ibidpage,
 %idemtracker=false,
@@ -18,7 +22,8 @@ dashed=true,
 %style=verbose-trad1,
 %
 % I finally worked out how to sort cites by year and bibliography by name
-% https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html
+% 
+%\url{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
 sorting=ynt,  %ynt for the citations in date order; nyt otherwise
 sortcites=true, 
 %sortlocale=en-GB,
@@ -38,7 +43,7 @@ urldate=short,
 usetranslator=true,
 useprefix=true,% van Nooten
 giveninits=false, % Give first names in the bibliography.  See 
-%https://github.com/alex-ball/biblatex-oxref/issues/17#issuecomment-843383550
+%\url{https://github.com/alex-ball/biblatex-oxref/issues/17#issuecomment-843383550}
 %maxnames=1, % before “et al.”
 %uniquelist=false,
 %refsection=section,
@@ -59,8 +64,14 @@ mvreference]{useeditor=true,
     usetranslator=true,
 %    uniquename=full
 }
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{compyear}
 % Patch so that date-abbreviations aren't just one digit.
-% Kindly supplied by Alex Ball, https://github.com/alex-ball/biblatex-oxref/issues/19
+% Kindly supplied by Alex Ball, 
+%\url{https://github.com/alex-ball/biblatex-oxref/issues/19}
+%    \begin{macrocode}
 \renewcommand{\blx@ox@compyear}[2]{%
     \def\num@one{#1}%
     \def\num@two{#2}%
@@ -80,29 +91,46 @@ mvreference]{useeditor=true,
         %%% End of changes
         \StrGobbleLeft{0\num@two}{\Result}%
     }{\num@two}}
-
-
-%%% patch of Sept 2019 
-%%%https://mail.google.com/mail/u/0/#inbox/FMfcgxwDrHpMnGSkkqjMqHwCCdJqBLkC
-%%%\makeatletter
-%%\xpatchbibmacro{bookeditor}{\global\undef\bbx@lasthash}{}{}{%
-%%    \wlog{INFO: oxyear fix no longer needed!}}
-%%%\makeatother
-
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{bookeditor}
+%  I don't use this, now.
+%  patch of Sept 2019 
+% 
+%\url{https://mail.google.com/mail/u/0/#inbox/FMfcgxwDrHpMnGSkkqjMqHwCCdJqBLkC}
+%    \begin{macrocode}
+%\makeatletter
+%\xpatchbibmacro{bookeditor}{\global\undef\bbx@lasthash}{}{}{%
+%    \wlog{INFO: oxyear fix no longer needed!}}
+%\makeatother
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{assignrefcontextentries}
 % I finally discovered how to sort citations by year and bibliography entries by name
 % (and see sorting, above).
-% https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html
+% 
+%\url{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
+%    \begin{macrocode}
 \AtBeginDocument{\assignrefcontextentries[]{*}}  
+%    \end{macrocode}
 % But this isn't working 2021-05 :-(
-
+%    \end{macro}
+%
+%    \begin{macro}{comma}
 % Following sections 3.10 and 4.7.5 of the Bib\LaTeX\ manual, 
 % put the comma \emph{inside} the quotation marks of the title.
+%    \begin{macrocode}
 \DefineBibliographyExtras{british}{\DeclareQuotePunctuation{.,}}
-
-
-% To avoid saying \newrefcontext[sorting=nyt] before \printbibliography in every 
-%document redefine \printbibliography (from biblatex.sty):
-
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{printbibliography}
+% To avoid saying \verb|\newrefcontext[sorting=nyt]| before
+% \verb|\printbibliography| in every 
+% document redefine \verb|\printbibliography| (from biblatex.sty):
+%    \begin{macrocode}
 \renewrobustcmd*{\printbibliography}{%
  \newrefcontext[sorting=nyt] % added this line
     \begingroup
@@ -111,20 +139,34 @@ mvreference]{useeditor=true,
     \@ifnextchar[%]
     {\blx@printbibliography}
     {\blx@printbibliography[]}}
-
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{volcite}
 % no ``p.'' or ``pp." in, for example, \verb|\volcite|:
+%    \begin{macrocode}
 \DefineBibliographyStrings{english}{%
     page             = {},
     pages            = {},
     volume     		= {},
 } 
-
-%\addbibresource
-%%[datatype=bibtex]
-%{biblio4-utf8.bib}
-
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{addbibresource}
+%  This isn't used, because we load different bibliographies in different
+% documents.
+%    \begin{macrocode}
+% \addbibresource
+%% [datatype=bibtex]
+% {biblio4-utf8.bib}
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{urls}
 % biblatex documentation 4.11.2 and macros from biblatex.def
 % Enable hot URLs for PDFs at Archive.org and Academia.edu 
+%    \begin{macrocode}
 \newif\ifBibHiddenURLs
  %
 \ifBibHiddenURLs 
@@ -190,15 +232,24 @@ mvreference]{useeditor=true,
 %
 \fi
 \BibHiddenURLsfalse
-
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{citealias}
+%  Not used.  Better done in individual documents.
+%    \begin{macrocode}
 %\defcitealias{meul-hist}{HIML}
 %\defcitealias{ncc}{NCC}
 %\defcitealias{bisw-bibl}{BSIMC}
-
-% to make bibtex notes print last, like addendums
-% from http://tex.stackexchange.com/
-%questions/138913/
-%how-to-move-the-field-note-at-the-end-of-the-reference
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{note}
+%  To make Bib\LaTeX\  notes print last, like addendums
+% from 
+%\url{http://tex.stackexchange.com/questions/138913/how-to-move-the-field-note-at-the-end-of-the-reference}
+%
+%    \begin{macrocode}
 \DeclareSourcemap{
     \maps[datatype=bibtex]{
         \map{
@@ -208,21 +259,39 @@ mvreference]{useeditor=true,
         }
     }
 }
-%tweaks to make the citation form:-  Author date: page
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{DeclareFieldFormat}
+% Tweaks to make the citation form:-  Author date: page
+%    \begin{macrocode}
 \DeclareFieldFormat{postnote}{#1}
 \renewcommand{\postnotedelim}{:\,}
 \renewcommand{\nameyeardelim}{ }
-
-% suppress shorthands: http://tex.stackexchange.com/questions/57041/
-%\AtEveryCitekey{\clearfield{shorthand}}
-
-
-
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{clearfield}
+% Suppress shorthands: \url{http://tex.stackexchange.com/questions/57041/}
+% 
+% Once again, I don't use this at present.
+%    \begin{macrocode}
+% \AtEveryCitekey{\clearfield{shorthand}}
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{csquotes}
+%    \begin{macrocode}
 \usepackage{csquotes} 
 \setquotestyle{american} % american = double quotes
-
-% Biblatex hacks to get pubstate (?forthcoming? etc.) behaving as it should
-% Biblatex manual 4.5.10
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{DeclareLabeldate}
+%
+% Bib\LaTeX\  hacks to get pubstate (?forthcoming? etc.) behaving as it should
+% Bib\LaTeX\  manual 4.5.10
+%    \begin{macrocode}
 \DeclareLabeldate{%
 	\field{date}
 	\field{year}
@@ -232,11 +301,15 @@ mvreference]{useeditor=true,
     \field{urldate}
     \literal{nodate}
 }
-
-
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{shorthandwidth}
+%
 % Some magic from “moewe” at 
-%https://tex.stackexchange.com/questions/442749/biblatex-have-hyperref-links-point-to-the-shorthand-list
+%\url{https://tex.stackexchange.com/questions/442749/biblatex-have-hyperref-links-point-to-the-shorthand-list}
 % that makes hyperlinks work from citations to a list of abbreviations.
+%    \begin{macrocode}
 \DeclareFieldFormat{shorthandwidth}{%
     \bibhypertarget{shorthand:\thefield{entrykey}}
     {#1}}
@@ -245,31 +318,67 @@ mvreference]{useeditor=true,
     \iffieldundef{shorthand}
     {\bibhyperref{#1}}
     {\bibhyperlink{shorthand:\thefield{entrykey}}{#1}}}
-
-%% penalty settings to make URLs format better.  From xurl documentation:
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{penalties}
+% Penalty settings to make URLs format better.  From xurl documentation.
+% 
+% Currently not used.
+%    \begin{macrocode}
 %\usepackage{xurl}
 %\setcounter{biburllcpenalty}{1}
 %\setcounter{biburlucpenalty}{1}
 %\setcounter{biburlnumpenalty}{1}
-%% but biblatex has this built in to it.
-
-% no "pp." or “pages” in \volcite etc.
+%% but Bib\LaTeX\  has this built in to it.
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{volcite}
+%
+% No "pp." or “pages” in \verb|\volcite| etc.
+%    \begin{macrocode}
 \DefineBibliographyStrings{english}{%
     page             = {},
     pages            = {},
 } 
-
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{literal}
 % Create a new data type in bibtex, @literal, which just prints the 
 % content of the title field. 
+%
+% Thanks to emilianoeheyns at 
+%\url{https://forums.zotero.org/discussion/110863/biblatex-both-langid-and-language-are-needed}
+%    \begin{macrocode}    
 \DeclareBibliographyDriver{literal}{%
     \newunit\newblock
     \printfield{title}%
     \finentry}
-    
-    
+%    \end{macrocode}
+%    \end{macro}
+%
+%    \begin{macro}{DeclareSourcemap}
+% It turns out that it's the \verb|langid| field that controls language-switching
+% in bibliography entries, not \verb|language|.  Since I've always used
+% \verb|language|, this code will just write the content of the \verb|language|
+% field to the \verb|langid| field, on the fly.
+%    \begin{macrocode}
+\DeclareSourcemap{
+    \maps[datatype=bibtex]{
+        \map{
+            \step[fieldsource=lanuage,fieldtarget=langid]
+        }
+    }
+}
+%    \end{macrocode}
+%    \end{macro}
+%  That's all, folks!
+%    
 \endinput
-% \section{Some alternate ways of dealing with the shorthands}
 
+% \section{Some alternate ways of dealing with the shorthands}
 
 %        \name{sortname}\name{author}\name{editor}\name{translator}
 %        \field{sorttitle}\field{title}}

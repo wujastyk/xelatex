@@ -36,3 +36,7 @@ sort={en-GB}, % sort according to this locale
 %
 % To print the glossary, say
 % \printunsrtglossaries % plant names.  iterate over all defined entries 
+
+% tests with tooltip - failed :-(
+%\let\oldgls\gls
+%\renewcommand{\gls}[1]{\pdftooltip{\oldgls{#1}}{#1}}

@@ -218,7 +218,8 @@ backgroundcolor=yellow
 %  \begin{macro}{\diatop}
 %%%% \verb|\diatop|, by Christina Thiele, 
 % used for r underdot overbar (ṝ, F6, 246)
-% See Conference Proceedings, TeXniques no. 5, p.11.
+% See \emph{TeXniques: Conference Proceedings} 1987, no.\,5, p.\,11. 
+% (\url{https://tug.org/texniques/})
 %    \begin{macrocode}
 \def\diatop[#1|#2]{\leavevmode{\setbox1=\hbox{{#1{}}}\setbox2=\hbox{{#2{}}}%
         \dimen0=\ifdim\wd1>\wd2\wd1\else\wd2\fi%
@@ -366,7 +367,8 @@ backgroundcolor=yellow
 %  \par
 %  \vskip 3em} %DW  was 1.5em
 %    \end{macrocode}
-
+%
+%    \begin{macro}{sloka}
 % See \url{http://cs.wlu.edu/~necaise/refs/latex2e/env-list.4.html}
 % Not used:
 %    \begin{macrocode}
@@ -383,8 +385,8 @@ backgroundcolor=yellow
 %               \item\itshape\relax}
 %               {\endlist}
 %    \end{macrocode}
-               
-% Here's another version from book.cls, based on {quote}
+%    \end{macro}               
+% Here's another version from book.cls, based on the {quote} environment
 %    \begin{macrocode}
    \newenvironment{sloka}          
    {\list{}{\rightmargin\leftmargin}%
