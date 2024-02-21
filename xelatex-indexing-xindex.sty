@@ -37,6 +37,10 @@ intoc]
 % firstpagestyle=fancy
 othercode= %\footnotesize
     \newcommand{\lettergroup}[1]{\relax}
+%
+%https://tex.stackexchange.com/questions/541009/index-layout-subitems-on-the-same-line-as-entries
+    \renewcommand\@idxitem{\par}
+    \renewcommand\subitem{}  
 }
 
 % simple command to print the English, put the Skt. 
@@ -57,12 +61,8 @@ othercode= %\footnotesize
     %  \index[lex]{#2@#2!\sansk{#1}}}%
 %  
 % Version with glosses as sub-items:
-%    \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
-%    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}
-%
-% Version with glosses on the same line in parens:
-    \index[lexical]{#2@\MakeLowercase{#2 (\emph{#1})}}%
-    \index[lexical]{#1@\MakeLowercase{\emph{#1} (#2)}}%
+    \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}
     }
 
 % Like \saneng, but only print the English, and send the Sanskrit silently to the index:
@@ -144,12 +144,8 @@ othercode= %\footnotesize
     %  \index[lex]{#2@#2!\sansk{#1}}}%
 %
 % Version with glosses as sub-items:
-%     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
-%    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}
-%
-% Version with glosses on the same line in parens:
-    \index[lexical]{#2@\MakeLowercase{#2 (\emph{#1})}}%
-    \index[lexical]{#1@\MakeLowercase{\emph{#1} (#2)}}%
+     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
+    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}
     }
 %
    \let\sse=\ssaneng

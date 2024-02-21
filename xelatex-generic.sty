@@ -39,12 +39,23 @@
 % Set up various fonts  and languages.
 %    \begin{macrocode}
 \usepackage{polyglossia} 
+%% work around a bug in polyglossia
+%% from https://github.com/reutenauer/polyglossia/issues/626
+%\makeatletter
+%\ExplSyntaxOn
+%\pretocmd\xpg@set@alias@values{%
+%    \prop_if_exist:cF { xpg@alias@keyvals@#1@#4 }
+%    { \prop_new:c {xpg@alias@keyvals@#1@#4} }
+%}{}{}
+%\ExplSyntaxOff
+%\makeatother
+%% end of workaround
+
 \defaultfontfeatures{%
   Mapping=tex-text,
   %Color=red,
   Numbers=OldStyle,
-  %Renderer=ICU
-} % not Harfbuzz yet
+} 
 
 \setmainlanguage[variant=british]{english}
 %    \end{macrocode}
@@ -121,7 +132,8 @@ Mapping=RomDev, %prefer slightly to iast
 \newfontfamily\bengalifont
 [Script=Bengali]
 % {Sahadeva}
-{Noto Serif Bengali}
+%{Noto Serif Bengali}
+{Tiro Bangla}
 %    \end{macrocode}
 % Use: \verb|\textbengali{বান মাছ}|
 

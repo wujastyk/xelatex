@@ -9,7 +9,7 @@
 
 \makeindex[name=lexical,
 title=Lexical Index,
-columns=3,
+columns=2,
 program=texindy,
 options= --input-markup xelatex -M iast.xdy -L general,
 %options = --input-markup xelatex -M de-accent
@@ -28,8 +28,12 @@ columns=1]
 \indexsetup{%level=\chapter*,
     noclearpage,
 % firstpagestyle=fancy
-    othercode= %\footnotesize
+    othercode=  %\footnotesize
     \newcommand{\lettergroup}[1]{\relax} % no alphabetical section headers
+%
+%https://tex.stackexchange.com/questions/541009/index-layout-subitems-on-the-same-line-as-entries
+   \renewcommand\@idxitem{\par}
+    \renewcommand\subitem{}  
 }
 
 % simple command to print the English, put the Skt. 
@@ -49,7 +53,11 @@ columns=1]
     %  \index[lex]{\sansk{#1}!#2@#2}%
     %  \index[lex]{#2@#2!\sansk{#1}}}%
     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
-    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
+    \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}%    
+%    \index[lexical]{#2@\MakeLowercase{#2 (\emph{#1})}}%
+%    \index[lexical]{#1@\MakeLowercase{\emph{#1} (#2)}}%
+%
+
 
 % Like \saneng, but only print the English, and send the Sanskrit silently to the index:
 \newcommand{\sanidx}[2]
