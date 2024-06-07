@@ -1,16 +1,31 @@
-% Formerly used xindy; now updated to use xindex
+% \section{xelatex-indexing-xindex.sty}
 %
+% Formerly used \verb"xindy"; now updated to use \verb"xindex"
+%
+% These are macros for creating several indexes. First,
+% a lexical index, Sanskrit-English and English-Sanskrit. Secondly
+% An index of manuscripts.
+
+% \subsection{Load indextools}
+% \begin{macro}{indextools.sty}
+%     \begin{macrocode}
 %\usepackage[imakeidx]{xindex} % deprecated by indextools
 \usepackage[xindex]{indextools}
+%    \end{macrocode}
 % This is useful if there are multiple indexes, and 
 % to make indexing happen during a normal XeTeX run.
-% see https://cikitsa.blogspot.ca/2016/07/getting-xindy-to-work-for-iast-encoded.html
+% see \\
+%\url{https://cikitsa.blogspot.ca/2016/07/getting-xindy-to-work-for-iast-encoded.html}
 %
 % This should be loaded \emph{before} \verb|hyperref|.
+% \end{macro}
 
+% \subsection{Create a lexical index}
 % A lexical index that sorts words with diacritical marks. I use this with
-% \saneng{}{} to make indexes and reverse indexes of Sanskrit terms.
-
+% \verb"\saneng{}{}" to make indexes and reverse indexes of Sanskrit terms.
+% Load the databases:
+%  \begin{macro}{\makeindex}
+%    \begin{macrocode}
 \makeindex[name=lexical,
 title=Glossary,
 columns=2,
@@ -19,10 +34,15 @@ columns=2,
 options=  -c iast -a -n, % nocasesensitive, noheadings
 intoc, % put an entry in the table of contents
 ]
-%
+%    \end{macrocode}
+% \end{macro}
 
-%  Now an index of manuscripts, used by the \MS or \MScite commands.
 
+% \subsection{Create an index of manuscripts}
+%  Now an index of manuscripts, used by the \verb"\MS" or \verb"\MScite" 
+%commands.
+%  \begin{macro}{\makeindex}
+%    \begin{macrocode}
 \makeindex[name=manuscripts,
 title=Index of Manuscripts,
 %program=texindy,
@@ -31,7 +51,12 @@ title=Index of Manuscripts,
 options = -c iast -a -n, % nocasesensitive, noheadings
 columns=1,
 intoc]
+%    \end{macrocode}
+% \end{macro}
 
+% \subsection{Format the index}
+%  \begin{macro}{\indexsetup}
+%    \begin{macrocode}
 \indexsetup{level=\section*,
 %    noclearpage,
 % firstpagestyle=fancy
@@ -42,7 +67,15 @@ othercode= %\footnotesize
     \renewcommand\@idxitem{\par}
     \renewcommand\subitem{}  
 }
+%    \end{macrocode}
+% \end{macro}
 
+% \subsection{User macros for indexing items}
+% A simple command \verb"\saneng{sanskrit}{english}" 
+% to print the English, put the Skt. 
+% in parentheses, and send both words to a lexical index.
+%  \begin{macro}{\saneng}
+%    \begin{macrocode}
 % simple command to print the English, put the Skt. 
 % in parentheses, and send both words to a lexical index.
 \newcommand{\saneng}[2]
@@ -63,8 +96,13 @@ othercode= %\footnotesize
 % Version with glosses as sub-items:
     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
     \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
+%    \end{macrocode}
+% \end{macro}
 
-% Like \saneng, but only print the English, and send the Sanskrit silently to the index:
+% \begin{macro}{\sanidx}
+% Like \verb"\saneng{}{}", but only print the English, and send the Sanskrit 
+%silently to the index:
+%    \begin{macrocode}
 \newcommand{\sanidx}[2]
 % #1 = Sanskrit
 % #2 = English
@@ -81,8 +119,13 @@ othercode= %\footnotesize
     %  \index[lex]{#2@#2!\sansk{#1}}}%
     \index[lexical]{#2@\MakeLowercase{#2}!#1@\emph{#1}}%
     \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
+%    \end{macrocode}
+% \end{macro}
 
-% Now a version that prints #1 in Devanagari in the text, but Latin in the index:
+% \begin{macro}{\sanengdev}
+% Now a version that prints \verb"#1" in Devanagari in the text, but Latin in 
+%the index:
+%    \begin{macrocode}
 \newcommand{\sanengdev}[2]
 % #1 = Sanskrit
 % #2 = English
@@ -108,8 +151,12 @@ othercode= %\footnotesize
 %    \index[lexical]{#2@\MakeLowercase{#2 (\emph{#1})}}%
 %    \index[lexical]{#1@\MakeLowercase{\emph{#1} (#2)}}}
 %
+%    \end{macrocode}
+% \end{macro}
 
-% variant that puts the English input first; of historical interest only:
+% \begin{macro}{\engsan}
+% A variant that puts the English input first; of historical interest only:
+%    \begin{macrocode}
 \newcommand{\engsan}[2]
 % #2 = Sanskrit
 % #1 = English
@@ -126,7 +173,13 @@ othercode= %\footnotesize
     %  \index[lex]{#2@#2!\sansk{#1}}}%
     \index[lexical]{#1!#2@\emph{#2}}%
     \index[lexical]{#2@\emph{#2}!#1}}
+%    \end{macrocode}
+% \end{macro}
 
+% \begin{macro}{\ssaneng}
+% Now a silent version of \verb"\saneng{}{}" that prints nothing in
+% the text but sends the entries to the index.
+%    \begin{macrocode}
 \providecommand{\ssaneng}[2]% silent \saneng index entry
 % #1 = Sanskrit
 % #2 = English
@@ -147,51 +200,81 @@ othercode= %\footnotesize
     \index[lexical]{#1@\emph{#1}!#2@\MakeLowercase{#2}}}
 %
    \let\sse=\ssaneng
+%    \end{macrocode}
+% \end{macro}
 
+
+% \subsection{Obsolete code}
+% 
 % Older code, using index.sty:
-
-% Lexical index, for inclusion in \engsan or \saneng
+% Lexical index, for inclusion in \verb"\engsan" or \verb"\saneng"
 %
-%\usepackage{index,amssymb}
-%\newindex{lex}{ldx}{lnd}{Lexical Index}
-%\makeatletter
+%\begin{verbatim}
+% %\usepackage{index,amssymb}
+% %\newindex{lex}{ldx}{lnd}{Lexical Index}
+% %\makeatletter
+%\end{verbatim}
+
+% \subsection{Tweak the item spacing of index items}
+%
+% \begin{macro}{\@idxitem}
+%    \begin{macrocode}
 \renewcommand\@idxitem{\par\hangindent 15\p@ }% from sanmed.sty
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{Obsolete code}
+%\begin{verbatim}
 %\newcommand\skt[2]{#1%\footnote{#1: Skt. \emph{#2}}%
 %% #1 = English 
 %% #2 = Sanskrit
 %% next lines experimental
-%  \index[skt]{#1!#2@\emph{#2}}%
-%  \index[skt]{#2@\emph{#2}!#1}}
-%\makeatother
+% %  \index[skt]{#1!#2@\emph{#2}}%
+% % \index[skt]{#2@\emph{#2}!#1}}
+% % \makeatother
 
 % test version of \saneng that puts tick marks around the indexed words.
 %\newcommand{\saneng}[2]
 %% #1 = Sanskrit
 %% #2 = English
-%{\def\tuck{\kern -.175em }%
-%  \def\loweramount{.6ex }%
-%  \leavevmode 
-%  \lower\loweramount
-%  \hbox{\tiny $\llcorner$}\tuck #2 (\sansk{#1})%
-%  \raise\loweramount 
-%  \hbox{\tuck \tiny $\urcorner$}%
+% %{\def\tuck{\kern -.175em }%
+% %\def\loweramount{.6ex }%
+% % \leavevmode 
+% % \lower\loweramount
+% % \hbox{\tiny $\llcorner$}\tuck #2 (\sansk{#1})%
+% % \raise\loweramount 
+% % \hbox{\tuck \tiny $\urcorner$}%
 %% and now make the index entries:
 %%  \index[lex]{\sansk{#1}!#2@#2}%
 %%  \index[lex]{#2@#2!\sansk{#1}}}%
-%  \index[lex]{#2!#1@\emph{#1}}%
-%  \index[lex]{#1@\emph{#1}!#2}}
+% %  \index[lex]{#2!#1@\emph{#1}}%
+% % \index[lex]{#1@\emph{#1}!#2}}
 
 % Index of manuscripts, old version for index.sty
-%\newindex{mex}{mdx}{mnd}{Index of Manuscripts}
-%\newcommand{\MS}[1]{MS #1\index[mex]{#1}}
-%\newcommand{\MSsilent}[1]{\index[mex]{#1}}
+% %\newindex{mex}{mdx}{mnd}{Index of Manuscripts}
+% %\newcommand{\MS}[1]{MS #1\index[mex]{#1}}
+% %\newcommand{\MSsilent}[1]{\index[mex]{#1}}
 
-%new version with imakeidx:
+%\end{verbatim}
+
+% \subsection{Macros for citing and indexing manuscripts}
+% New version with \verb"imakeidx".
+% \begin{macro}{\MS, \MScite}
+% Say \verb"\MS{Kathmandu, NAK 1-243}".  \verb"\MScite{}" is identical.
+% This prints “MS Kathmandu, NAK 1-243” in the text and sends an entry to the
+% index of manuscripts. 
+%    \begin{macrocode}
 \newcommand{\MS}[1]{MS #1\index[manuscripts]{#1}} 
     \let\MScite=\MS
 \newcommand{\MSsilent}[1]{\index[manuscripts]{#1}} 
     \let\MSnocite=\MSsilent
+%    \end{macrocode}
+% \end{macro}
+
+% \subsection{Obsolete code}
     
-%\renewcommand{\doublespacing}{%
-%  \renewcommand{\baselinestretch}{1.5}
-%  \addtolength{\footnotesep}{0.5\footnotesep}}
+% \begin{verbatim}
+% %\renewcommand{\doublespacing}{%
+% %\renewcommand{\baselinestretch}{1.5}
+% %\addtolength{\footnotesep}{0.5\footnotesep}}
+% \end{verbatim}

@@ -1,5 +1,7 @@
+% \section{xelatex-generic.sty}
 % This file started to look like this in about 2016-04-01
-% \section{XeLaTeX stuff}
+%
+% \subsection{XeLaTeX stuff}
 % Normalize any residual Unicode combining accents,
 % and write out error messages, if any:
 %
@@ -12,7 +14,7 @@
 %    \end{macrocode}
 %  \end{macro}
 
-% \section{Used at different times}
+% \subsection{Used at different times}
 % Commented out.
 %  \begin{macro}{hyperref,pdfx}
 %    \begin{macrocode}
@@ -21,7 +23,7 @@
 %    \end{macrocode}
 %  \end{macro}
 
-% \section{Multilingual macros}
+% \subsection{Multilingual macros}
 % from:
 %\href{http://tex.stackexchange.com/questions/38607/no-room-for-a-new-dimen/38609#38609}
 %{Stackexchange}.
@@ -74,7 +76,7 @@
 % {Libertinus Serif} % something funny with overlapping chars in bold 2019-05
 %    \end{macrocode}
 
-% \section{Packages that Polyglossia now auto-loads}
+% \subsection{Packages that Polyglossia now auto-loads}
 % polyglossia automatically loads: fixltx2e, etex, xunicode, fontspec.  
 % But we still need \verb|metalogo| for the definitions of logos like \verb|\XeLaTeX|.
 %    \begin{macrocode}
@@ -166,7 +168,7 @@ Mapping=RomDev, %prefer slightly to iast
 %  \end{macro} 
 % End of polyglossia stuff.
 
-% \section{Sanskrit hyphenation}
+% \subsection{Sanskrit hyphenation}
 %  \begin{macro}{hyphenations}
 %  A cumulative hyphenation exception file, \verb|sanskrit-hyphenations.tex|,
 %  adds numerous hand-tuned hyphenation points to the default Polyglossia 
@@ -181,7 +183,7 @@ Mapping=RomDev, %prefer slightly to iast
 %    \end{macrocode}
 %  \end{macro}
 
-% \section{Misc.}
+% \subsection{Misc.}
 %  \begin{macro}{csquotes,graphicx}
 %    \begin{macrocode}
 \usepackage[style=british]{csquotes} % error in log if not included
@@ -189,7 +191,7 @@ Mapping=RomDev, %prefer slightly to iast
 %    \end{macrocode}
 %  \end{macro}
 
-% \section{Marginal note hacks}
+% \subsection{Marginal note hacks}
 % Not used:
 %    \begin{macrocode}
 % \usepackage{marginfix}
@@ -226,7 +228,7 @@ backgroundcolor=yellow
 %    \end{macrocode}
 %  \end{macro}
             
-% \section{Stacked diacritics}
+% \subsection{Stacked diacritics}
 %  \begin{macro}{\diatop}
 %%%% \verb|\diatop|, by Christina Thiele, 
 % used for r underdot overbar (ṝ, F6, 246)
@@ -243,7 +245,7 @@ backgroundcolor=yellow
 % E.g. of use: \verb|\diatop[\'|{\=o}]| gives u macron acute
 %  \end{macro}
 
-% \section{Private abbreviations}
+% \subsection{Private abbreviations}
 %  \begin{macro}{\AD, etc.}
 %    \begin{macrocode}
 \newcommand{\AD}{\textsc{ce}{}}
@@ -263,7 +265,7 @@ backgroundcolor=yellow
 %    \end{macrocode}
 %  \end{macro}
 
-% \section{Nice hanging-indent footnotes}
+% \subsection{Nice hanging-indent footnotes}
 %  \begin{macro}{\hangfootnotes}
 % LaTeX Companion, p.73.  Not used.
 %    \begin{macrocode}
@@ -291,7 +293,7 @@ backgroundcolor=yellow
 %    \end{macrocode}
 %  \end{macro}
 
-% \section{Normal LaTeX settings now}
+% \subsection{Normal LaTeX settings now}
 %
 %    \begin{macrocode}
 \setcounter{secnumdepth}{0}
@@ -350,7 +352,7 @@ backgroundcolor=yellow
 % \end{figure}
 %  \end{verbatim}
 
-% \section{From article.cls}
+% \subsection{From article.cls}
 % This isn't used.
 %    \begin{macrocode}
 % \typeout{Wujastyk: NB: Modified maketitle command, flush

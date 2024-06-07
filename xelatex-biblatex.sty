@@ -1,5 +1,6 @@
-% \section{Bib\LaTeX\ }
-%    \begin{macro}{BibLaTeX}
+% \section{xelatex-biblatex.sty}
+% \subsection{Load the basic package with options}
+%    \begin{macro}{biblatex.sty}
 %  Load the Bib\LaTeX\ package and
 % the \verb|oxyear| style, and set the various options.
 %    \begin{macrocode}
@@ -48,7 +49,12 @@ giveninits=false, % Give first names in the bibliography.  See
 %uniquelist=false,
 %refsection=section,
 ]{biblatex}
+%    \end{macrocode}
+% \end{macro}
 
+% \subsection{Some options for all the main entry types}
+% \begin{macro}{\ExecuteBibliographyOptions}
+%    \begin{macrocode}
 \ExecuteBibliographyOptions[% for biblatex-oxyear
 article,
 book,
@@ -66,7 +72,9 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{compyear}
+
+% \subsection{Fix date abbreviations to be more verbose}
+%    \begin{macro}{\blx@ox@compyear}
 % Patch so that date-abbreviations aren't just one digit.
 % Kindly supplied by Alex Ball, 
 %\url{https://github.com/alex-ball/biblatex-oxref/issues/19}
@@ -93,6 +101,8 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
+
+% \subsection{Not used}
 %    \begin{macro}{bookeditor}
 %  I don't use this, now.
 %  patch of Sept 2019 
@@ -106,7 +116,9 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{assignrefcontextentries}
+
+% \subsection{Sort citations and bibliography differently - fail!}
+%    \begin{macro}{\assignrefcontextentries}
 % I finally discovered how to sort citations by year and bibliography entries by name
 % (and see sorting, above).
 % 
@@ -117,7 +129,9 @@ mvreference]{useeditor=true,
 % But this isn't working 2021-05 :-(
 %    \end{macro}
 %
-%    \begin{macro}{comma}
+
+% \subsection{Placement of commas inside title quotes}
+%    \begin{macro}{\DefineBibliographyExtras}
 % Following sections 3.10 and 4.7.5 of the Bib\LaTeX\ manual, 
 % put the comma \emph{inside} the quotation marks of the title.
 %    \begin{macrocode}
@@ -125,7 +139,9 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{printbibliography}
+
+% \subsection{Sorting the bibliography}
+%    \begin{macro}{\printbibliography}
 % To avoid saying \verb|\newrefcontext[sorting=nyt]| before
 % \verb|\printbibliography| in every 
 % document redefine \verb|\printbibliography| (from biblatex.sty):
@@ -141,6 +157,8 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
+
+% \subsection{String abbreviations}
 %    \begin{macro}{volcite}
 % no ``p.'' or ``pp." in, for example, \verb|\volcite|:
 %    \begin{macrocode}
@@ -152,7 +170,9 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{addbibresource}
+
+% \subsection{Load the bibliography file}
+%    \begin{macro}{\addbibresource}
 %  This isn't used, because we load different bibliographies in different
 % documents.
 %    \begin{macrocode}
@@ -162,9 +182,13 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{urls}
-% biblatex documentation 4.11.2 and macros from biblatex.def
+
+% \subsection{Auto-formatting of URL strings}
+
 % Enable hot URLs for PDFs at Archive.org and Academia.edu 
+% and other sites. 
+%    \begin{macro}{\DeclareFieldFormat}
+% See Bib\LaTeX\ documentation 4.11.2 and macros from biblatex.def
 %    \begin{macrocode}
 \newif\ifBibHiddenURLs
  %
@@ -234,8 +258,11 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{citealias}
-%  Not used.  Better done in individual documents.
+
+% \subsection{Some bibliographical aliases - not used}
+%  Not used.  This should be done in individual documents and 
+% document styles, not here in a generic style file.
+%    \begin{macro}{\defcitealias}
 %    \begin{macrocode}
 %\defcitealias{meul-hist}{HIML}
 %\defcitealias{ncc}{NCC}
@@ -243,11 +270,13 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{note}
-%  To make Bib\LaTeX\  notes print last, like addendums
-% from 
-%\url{http://tex.stackexchange.com/questions/138913/how-to-move-the-field-note-at-the-end-of-the-reference}
+
+% \subsection{Move notes to the end of bibliography entries}
+%  To make Bib\LaTeX\  notes print last, like addendums.
 %
+%    \begin{macro}{\DeclareSourcemap}
+% From\\ 
+%\url{http://tex.stackexchange.com/questions/138913/how-to-move-the-field-note-at-the-end-of-the-reference}
 %    \begin{macrocode}
 \DeclareSourcemap{
     \maps[datatype=bibtex]{
@@ -261,7 +290,9 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{DeclareFieldFormat}
+
+% \subsection{Tweak the punctuation of citations}
+%    \begin{macro}{\DeclareFieldFormat}
 % Tweaks to make the citation form:-  Author date: page
 %    \begin{macrocode}
 \DeclareFieldFormat{postnote}{#1}
@@ -270,7 +301,9 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{clearfield}
+
+% \subsection{Suppress shorthands.  Not used}
+%    \begin{macro}{\clearfield}
 % Suppress shorthands: \url{http://tex.stackexchange.com/questions/57041/}
 % 
 % Once again, I don't use this at present.
@@ -279,6 +312,8 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
+
+% \subsection{csquotes}
 %    \begin{macro}{csquotes}
 %    \begin{macrocode}
 \usepackage{csquotes} 
@@ -286,8 +321,9 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{DeclareLabeldate}
-%
+
+% \subsection{Hacks for pubstate}
+%    \begin{macro}{\DeclareLabeldate}
 % Bib\LaTeX\  hacks to get pubstate (?forthcoming? etc.) behaving as it should
 % Bib\LaTeX\  manual 4.5.10
 %    \begin{macrocode}
@@ -303,11 +339,13 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{shorthandwidth}
+
+% \subsection{Width of shorthand abbreviations}
+%    \begin{macro}{\DeclareFieldFormat}
 %
-% Some magic from “moewe” at 
+% Some magic from “moewe” at \\
 %\url{https://tex.stackexchange.com/questions/442749/biblatex-have-hyperref-links-point-to-the-shorthand-list}
-% that makes hyperlinks work from citations to a list of abbreviations.
+% \\that makes hyperlinks from citations point to the list of abbreviations.
 %    \begin{macrocode}
 \DeclareFieldFormat{shorthandwidth}{%
     \bibhypertarget{shorthand:\thefield{entrykey}}
@@ -320,6 +358,8 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
+
+% \subsection{Penalties for URLs -- not used}
 %    \begin{macro}{penalties}
 % Penalty settings to make URLs format better.  From xurl documentation.
 % 
@@ -333,8 +373,10 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%
-%    \begin{macro}{literal}
+
+% \subsection{Create a dummy data type for putting literal strings into a 
+% bibliography}
+%    \begin{macro}{\DeclareBibliographyDriver}
 % Create a new data type in bibtex, @literal, which just prints the 
 % content of the title field. 
 %
@@ -348,7 +390,9 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-%    \begin{macro}{DeclareSourcemap}
+
+% \subsection{Turn language into langid}
+%    \begin{macro}{\DeclareSourcemap}
 % It turns out that it's the \verb|langid| field that controls language-switching
 % in bibliography entries, not \verb|language|.  Since I've always used
 % \verb|language|, this code will just write the content of the \verb|language|
