@@ -1,6 +1,75 @@
+% \section{Glossaries}
 %
-% Glossaries
+%Official documentation of LaTeX glossaries is found in the TeXlive
+%distribution:
+% \begin{itemize}
+% \item  glossaries.pdf
+% \item  glossaries-extra.pdf
+% \item bib2gls.pdf
+% \item glossariesbegin.pdf
+% \end{itemize}
 %
+%See 
+%\begin{itemize}
+%    \item  \url{https://ctan.org/pkg/glossaries}
+%    \item \url{https://ctan.org/pkg/glossaries-extra}
+%    \item \url{https://ctan.org/pkg/bib2gls}
+%\end{itemize}
+%
+% The Glossaries packages are complex and the documentation is  
+% voluminous and written from the point of view of an insider programmer.
+% See also \url{https://en.wikibooks.org/wiki/LaTeX/Glossary}
+%
+% I cannot pretend to understand the package overall, but the code below
+% works.
+%
+%\subsection{Glossaries of plants and animals}
+%
+%The macros below initialize two glossaries, plants and animals.  These 
+%glossaries draw their content from the databases \verb"plants.bib" and 
+%\verb"animals.bib", 
+% using the \verb"bib2gls" feature of 
+%Glossaries.  These two databases are in simple bibtex format. E.g.,
+%\begin{verbatim}
+%    @Entry{māṃsī,
+%    citationkey = {māṃsī},
+%    description = {Nardostachys grandiflora, DC. See 
+%                   \volcite{1}[\#1691]{NK}},
+%    name        = {spikenard},
+%}
+%\end{verbatim} 
+% Note the use of Bib\LaTeX\ citations in the \verb"description" field.
+%
+%The citation keys in the databases, e.g., \verb"māṃsī", is used as the 
+% argument of the macro
+%\verb"\gls{}" in your document. It may contain diacritical marks.  For 
+%example, you 
+%write “The plant is \verb"\gls{māṃsī}"” and your out put PDF will print “The 
+%plant is 
+%spikenard”.  The macro \verb"\gls" has looked up “māṃsī” in plants.bib and 
+%replaced 
+%it with the name “spikenard”.  At the same time, the entry “spikenard” is 
+%written to the glossary at the end of your document, giving the name 
+%“māṃsī” 
+%and then the contents of the description field from \verb"plants.bib". 
+%
+% \subsubsection{Singular, plural, capitalized}
+%The command \verb"\glspl{}" produces the plural (“spikenards”).  The 
+%command 
+%\verb"\Gls{}" capitalizes the ouput (“Spikenard”).  \verb"\Glspl{}" \ldots\  
+%(“Spikenards”).  If the 
+%plural isn't composed with suffix s, you can add a field “plural = “ to the 
+%plants.bib database giving the plural form.  (with \verb"plural=mongeese," 
+%\verb"\Glspl{nakula}" prints “Mongeese”.)  
+%
+%The glossaries at the end of your document are produced by the commands
+%\begin{itemize}
+%    \item \verb"\printunsrtglossary[type=plants]"
+%    \item \verb"\printunsrtglossary[type=animals]"
+%\end{itemize}
+%
+%  \begin{macro}{Load glossaries-extra}
+%    \begin{macrocode}
 \usepackage[record={only}, % see bib2gls manual, option summary
 nostyles, 								% don't load things you don't need
 style=bookindex, 				  % load this style
@@ -8,31 +77,70 @@ stylemods=bookindex, 		  % load the updates for this style
 postpunc={\,:\ },					% after description, before page numbers
 automake,							  % run bib2gls automatically; bib2gls manual
 section]{glossaries-extra}
-
+%    \end{macrocode}
+%  \end{macro}
+%
+%  \begin{macro}{Define two glossaries}
+% Give names to the database types and to the default headings 
+% that will print when the glossaries are printed.  Filename extensions
+% etc.\ are handled silently.
+%    \begin{macrocode}
 \newglossary*{plants}{Flora}  
 \newglossary*{animals}{Fauna}
-
-
-% glossaries-extra.pdf manual, section 8.7.1, p.443:
+%    \end{macrocode}
+%  \end{macro} 
+%
+% \section{Format of the glossary entries}
+%
+% This controls the format of the text printed in the glossaries.\\
+% See % glossaries-extra.pdf manual, section 8.7.1, p.443
+%
+%  \begin{macro}{\glsxtrbookindexname}
+%  \begin{macrocode}
 \renewcommand*{\glsxtrbookindexname}[1]{%
     \glossentryname{#1}%
     \space (\emph{\the\glslabeltok{#1}})%
     \ifglshasdesc{#1}{\space \glossentrydesc{#1}\glspostdescription}{}%
 }
-% glossaries-extra.pdf manual, section 8.7.1, p.446; get rid of that pesky 
-% pre-comma:
+%    \end{macrocode}
+% Get rid of that pesky pre-comma.
+% (glossaries-extra.pdf manual, section 8.7.1, p.446):
+%  \begin{macrocode}
 \renewcommand*\glsxtrbookindexprelocation[1]{\empty }
+%    \end{macrocode}
+%  \end{macro}
 %
-%\renewcommand{\glossaryname}{Materia Medica}
+%
+%  \begin{macro}{Glossary preamble}
+%
+% Tell the reader that a colon (\verb"postpunc" above) is what 
+% separates the glossary text from the page numbers.  It can be 
+% a bit visually confusing.\\
+% (glossaries-extra.pdf manual, section 8.7.1, p.443):
+%  \begin{macrocode}
+%\renewcommand{\glossaryname}{Materia Medica} % can do that later
 \setglossarypreamble{\emph{\footnotesize 
         Numbers after the final colon refer to 
         pages in this book.}\bigskip}  
+%    \end{macrocode}
+%  \end{macro}
 %
-%\GlsXtrLoadResources[% instructions to bib2gls:
-%selection=all, % print everything; bib2gls manual, section 5.4
-%src={~/Dropbox/localtexmf/bibtex/bib/plants,~/Dropbox/localtexmf/bibtex/bib/animals},
-
-% plants
+% \section{Load up the databases}
+%
+% Instructions to \verb"bib2gls", telling it the location 
+% of the databases and what type of data is in each.
+%
+% The \verb"type=" parameter tells bib2gls what kind of data is in this
+% database.  So you can use the same \verb"\gls{}" command whether you 
+% are referring to a plant or an animal.  \verb"bib2gls" will look through
+% both databases and send the plant identies to the plants glossary and 
+% the animals to the animals glossary.
+%
+%  I don't understand why the \verb"field-aliases" parameter is necessary, 
+% but it seems to be.
+% \subsection{Plants}
+%  \begin{macro}{\GlsXtrLoadResources}
+%    \begin{macrocode}
 \GlsXtrLoadResources[
 src={~/Dropbox/localtexmf/bibtex/bib/plants},
 type=plants,
@@ -40,8 +148,9 @@ type=plants,
 field-aliases={identifier=citationkey},
 sort={en-GB},
 ]
-
-% animals
+%    \end{macrocode}
+% \subsection{Animals}
+%    \begin{macrocode}
 \GlsXtrLoadResources[
 src={~/Dropbox/localtexmf/bibtex/bib/animals},
 type=animals,
@@ -49,6 +158,19 @@ type=animals,
 field-aliases={identifier=citationkey},
 sort={en-GB},
 ]
+%    \end{macrocode}
+%  \end{macro}
+%
+%\section{Print the glossaries}
+%As mentioned above, produce the actual glossaries with
+%\begin{itemize}
+%    \item \verb"\printunsrtglossary[type=plants]"
+%    \item \verb"\printunsrtglossary[type=animals]"
+%\end{itemize}
+% at the end of your document.
+% \bigskip
+%
+%That's all folks!
 
 \endinput
 
