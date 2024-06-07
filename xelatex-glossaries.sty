@@ -22,23 +22,36 @@
 %
 % I cannot pretend to understand the package overall, but the code below
 % works.
+% 
+% A shorter and earlier description of this package -- with pictures! -- is 
+%available at 
+% \url{https://cikitsa.blogspot.com/2022/11/making-index-of-plant-names.html}
 %
 %\subsection{Glossaries of plants and animals}
 %
-%The macros below initialize two glossaries, plants and animals.  These 
+%This package initializes two glossaries, plants and animals.  These 
 %glossaries draw their content from the databases \verb"plants.bib" and 
 %\verb"animals.bib", 
 % using the \verb"bib2gls" feature of 
-%Glossaries.  These two databases are in simple bibtex format. E.g.,
+%Glossaries.  These two databases are in simple bibtex format. One entry, 
+%for example, reads,
 %\begin{verbatim}
-%    @Entry{māṃsī,
-%    citationkey = {māṃsī},
-%    description = {Nardostachys grandiflora, DC. See 
-%                   \volcite{1}[\#1691]{NK}},
-%    name        = {spikenard},
+%@Entry{māṃsī,
+%citationkey = {māṃsī},
+%description = {Nardostachys grandiflora, DC. See 
+%               \volcite{1}[\#1691]{NK}},
+%name        = {spikenard},
 %}
 %\end{verbatim} 
-% Note the use of Bib\LaTeX\ citations in the \verb"description" field.
+% Note the use of Bib\LaTeX\ citations in the \verb"description" field.  You will 
+%have loaded the \verb"biblatex" package earlier for this to work.
+%
+%Also, 
+%note that the separate field “\verb"citationkey = {māṃsī},"” is not 
+% necessary (as far as I know).  The citation key is the word after
+%  \verb"@Entry{" and before the comma.  I use 
+% \href{http://jabref.org}{JabRef} to manage my databases and it adds the 
+% \verb"citationkey =" by itself.  It does no harm.
 %
 %The citation keys in the databases, e.g., \verb"māṃsī", is used as the 
 % argument of the macro
@@ -53,14 +66,15 @@
 %“māṃsī” 
 %and then the contents of the description field from \verb"plants.bib". 
 %
-% \subsubsection{Singular, plural, capitalized}
+% \subsection{Singular, plural, capitalized}
 %The command \verb"\glspl{}" produces the plural (“spikenards”).  The 
 %command 
 %\verb"\Gls{}" capitalizes the ouput (“Spikenard”).  \verb"\Glspl{}" \ldots\  
 %(“Spikenards”).  If the 
-%plural isn't composed with suffix s, you can add a field “plural = “ to the 
-%plants.bib database giving the plural form.  (with \verb"plural=mongeese," 
-%\verb"\Glspl{nakula}" prints “Mongeese”.)  
+%plural isn't composed with suffix s, you can add a field 
+% “\verb"plural ="“ to the 
+%\verb"plants.bib" database giving the plural form.  (So, with 
+% \verb"plural=mongeese," \verb"\Glspl{nakula}" prints “Mongeese”.)  
 %
 %The glossaries at the end of your document are produced by the commands
 %\begin{itemize}
@@ -68,7 +82,7 @@
 %    \item \verb"\printunsrtglossary[type=animals]"
 %\end{itemize}
 %
-%  \begin{macro}{Load glossaries-extra}
+%  \begin{macro}{glossaries-extra.sty}
 %    \begin{macrocode}
 \usepackage[record={only}, % see bib2gls manual, option summary
 nostyles, 								% don't load things you don't need
@@ -80,7 +94,8 @@ section]{glossaries-extra}
 %    \end{macrocode}
 %  \end{macro}
 %
-%  \begin{macro}{Define two glossaries}
+% \subsection{Define two glossaries}
+%  \begin{macro}{\newglossary}
 % Give names to the database types and to the default headings 
 % that will print when the glossaries are printed.  Filename extensions
 % etc.\ are handled silently.
@@ -110,9 +125,8 @@ section]{glossaries-extra}
 %    \end{macrocode}
 %  \end{macro}
 %
-%
-%  \begin{macro}{Glossary preamble}
-%
+%\subsection{Glossary preamble}
+%  \begin{macro}{\setglossarypreamble}
 % Tell the reader that a colon (\verb"postpunc" above) is what 
 % separates the glossary text from the page numbers.  It can be 
 % a bit visually confusing.\\
@@ -163,11 +177,14 @@ sort={en-GB},
 %
 %\section{Print the glossaries}
 %As mentioned above, produce the actual glossaries with
+%\begin{macro}{\printunsrtglossary}
 %\begin{itemize}
 %    \item \verb"\printunsrtglossary[type=plants]"
 %    \item \verb"\printunsrtglossary[type=animals]"
 %\end{itemize}
 % at the end of your document.
+%\end{macro}
+
 % \bigskip
 %
 %That's all folks!
