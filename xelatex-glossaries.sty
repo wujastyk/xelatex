@@ -1,13 +1,17 @@
 %
 % Glossaries
 %
-\usepackage[record=only,
-nostyles,
-style=bookindex,
-stylemods=bookindex,
-postpunc={\,:\ }
-]
-{glossaries-extra}
+\usepackage[record={only}, % see bib2gls manual, option summary
+nostyles, 								% don't load things you don't need
+style=bookindex, 				  % load this style
+stylemods=bookindex, 		  % load the updates for this style
+postpunc={\,:\ },					% after description, before page numbers
+automake,							  % run bib2gls automatically; bib2gls manual
+section]{glossaries-extra}
+
+\newglossary*{plants}{Flora}  
+\newglossary*{animals}{Fauna}
+
 
 % glossaries-extra.pdf manual, section 8.7.1, p.443:
 \renewcommand*{\glsxtrbookindexname}[1]{%
@@ -19,20 +23,42 @@ postpunc={\,:\ }
 % pre-comma:
 \renewcommand*\glsxtrbookindexprelocation[1]{\empty }
 %
-\renewcommand{\glossaryname}{Glossary and Index of Medical Substances}
+%\renewcommand{\glossaryname}{Materia Medica}
 \setglossarypreamble{\emph{\footnotesize 
-            Numbers after the final colon refer to 
-            pages in this book.}\bigskip}  
+        Numbers after the final colon refer to 
+        pages in this book.}\bigskip}  
 %
-\GlsXtrLoadResources[% instructions to bib2gls:
-selection=all, % print everything; bib2gls manual, section 5.4
-src={~/Dropbox/localtexmf/bibtex/bib/plants}, % terms are defined in plants.bib 
-sort={en-GB}, % sort according to this locale
+%\GlsXtrLoadResources[% instructions to bib2gls:
+%selection=all, % print everything; bib2gls manual, section 5.4
+%src={~/Dropbox/localtexmf/bibtex/bib/plants,~/Dropbox/localtexmf/bibtex/bib/animals},
+
+% plants
+\GlsXtrLoadResources[
+src={~/Dropbox/localtexmf/bibtex/bib/plants},
+type=plants,
+%selection=all,  % select this if you want all the contents of the database
+field-aliases={identifier=citationkey},
+sort={en-GB},
 ]
+
+% animals
+\GlsXtrLoadResources[
+src={~/Dropbox/localtexmf/bibtex/bib/animals},
+type=animals,
+%selection=all,  % select this if you want all the contents of the database
+field-aliases={identifier=citationkey},
+sort={en-GB},
+]
+
+\endinput
+
+% terms are defined in 
+%plants.bib and animals.bib
+%sort={en-GB}, % sort according to this locale
 %
 % Usage:
 % To index an item say \gls{klītaka}.  Use the sanskrit name as the label 
-% both here and in the plants.bib file. 
+% both here and in the plants.bib file. Plurals \glspl{}, capital \Gls{}.
 %
 % To print the glossary, say
 % \printunsrtglossaries % plant names.  iterate over all defined entries 
