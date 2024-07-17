@@ -15,10 +15,13 @@
 %  \end{macro}
 
 % \subsection{Used at different times}
-% Commented out.
-%  \begin{macro}{hyperref,pdfx}
+% Commented out, except for url, for which  see
+% 
+%\url{https://tex.stackexchange.com/questions/49788}.
+%  \begin{macro}{hyperref,pdfx,url}
 %    \begin{macrocode}
-%\usepackage[final=true]{hyperref}
+\RequirePackage[hyphens]{url}
+%\usepackage[final=true,hyphens]{hyperref}
 %\usepackage[a-1b]{pdfx} % get an archival PDF
 %    \end{macrocode}
 %  \end{macro}
@@ -402,11 +405,14 @@ backgroundcolor=yellow
 %    \end{macro}               
 % Here's another version from book.cls, based on the {quote} environment
 %    \begin{macrocode}
-   \newenvironment{sloka}          
-   {\list{}{\rightmargin\leftmargin}%
-    \item\itshape\relax}
-{\endlist}               
+\newenvironment{sloka}          
+{\list{}{\rightmargin\leftmargin}%
+    \renewcommand{\emph}[1]{\textit{##1}}% 
+    \smallskip\item\itshape\relax}
+{\smallskip\endlist}               
 %    \end{macrocode}
+% Note that we replaced \verb|\emph| with \verb|\textit| so that 
+% italicized words in the italic environment stay italicized after all.
 %
 
 %  \begin{macro}{\PreliminaryNote}
