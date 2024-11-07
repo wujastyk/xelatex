@@ -27,7 +27,7 @@
 %available at 
 % \url{https://cikitsa.blogspot.com/2022/11/making-index-of-plant-names.html}
 %
-%\subsection{Glossaries of plants and animals}
+%\subsection{Glossaries of plants, animals, and minerals}
 %
 %This package initializes two glossaries, plants and animals.  These 
 %glossaries draw their content from the databases \verb"plants.bib" and 
@@ -80,6 +80,7 @@
 %\begin{itemize}
 %    \item \verb"\printunsrtglossary[type=plants]"
 %    \item \verb"\printunsrtglossary[type=animals]"
+%    \item \verb"\printunsrtglossary[type=minerals]"
 %\end{itemize}
 %
 %  \begin{macro}{glossaries-extra.sty}
@@ -102,6 +103,7 @@ section]{glossaries-extra}
 %    \begin{macrocode}
 \newglossary*{plants}{Flora}  
 \newglossary*{animals}{Fauna}
+\newglossary*{minerals}{Minerals}
 %    \end{macrocode}
 %  \end{macro} 
 %
@@ -168,6 +170,18 @@ sort={en-GB},
 \GlsXtrLoadResources[
 src={~/Dropbox/localtexmf/bibtex/bib/animals},
 type=animals,
+%selection=all,  % select this if you want all the contents of the database
+field-aliases={identifier=citationkey},
+sort={en-GB},
+]
+%    \end{macrocode}
+%  \end{macro}
+%
+% \subsection{Minerals}
+%    \begin{macrocode}
+\GlsXtrLoadResources[
+src={~/Dropbox/localtexmf/bibtex/bib/minerals},
+type=minerals,
 %selection=all,  % select this if you want all the contents of the database
 field-aliases={identifier=citationkey},
 sort={en-GB},
