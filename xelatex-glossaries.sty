@@ -120,6 +120,7 @@ section]{glossaries-extra}
     \ifglshasdesc{#1}{\space \glossentrydesc{#1}\glspostdescription}{}%
 }
 %    \end{macrocode}
+%
 % Get rid of that pesky pre-comma.
 % (glossaries-extra.pdf manual, section 8.7.1, p.446):
 %  \begin{macrocode}
@@ -128,6 +129,7 @@ section]{glossaries-extra}
 %  \end{macro}
 %
 %\subsection{Glossary preamble}
+%
 %  \begin{macro}{\setglossarypreamble}
 % Tell the reader that a colon (\verb"postpunc" above) is what 
 % separates the glossary text from the page numbers.  It can be 
@@ -154,43 +156,46 @@ section]{glossaries-extra}
 %
 %  I don't understand why the \verb"field-aliases" parameter is necessary, 
 % but it seems to be.
+%
 % \subsection{Plants}
-%  \begin{macro}{\GlsXtrLoadResources}
+%
 %    \begin{macrocode}
 \GlsXtrLoadResources[
-src={~/Dropbox/localtexmf/bibtex/bib/plants},
-type=plants,
-%selection=all,  % select this if you want all the contents of the database
-field-aliases={identifier=citationkey},
-sort={en-GB},
+  src={~/Dropbox/localtexmf/bibtex/bib/plants},
+  type=plants,
+  %selection=all,  % select this if you want all the contents of the database
+  field-aliases={identifier=citationkey},
+  sort={en-GB},
 ]
 %    \end{macrocode}
+%
 % \subsection{Animals}
+%
 %    \begin{macrocode}
 \GlsXtrLoadResources[
-src={~/Dropbox/localtexmf/bibtex/bib/animals},
-type=animals,
-%selection=all,  % select this if you want all the contents of the database
-field-aliases={identifier=citationkey},
-sort={en-GB},
+  src={~/Dropbox/localtexmf/bibtex/bib/animals},
+  type=animals,
+  %selection=all,  % select this if you want all the contents of the database
+  field-aliases={identifier=citationkey},
+  sort={en-GB},
 ]
 %    \end{macrocode}
-%  \end{macro}
 %
 % \subsection{Minerals}
+%
 %    \begin{macrocode}
 \GlsXtrLoadResources[
-src={~/Dropbox/localtexmf/bibtex/bib/minerals},
-type=minerals,
-%selection=all,  % select this if you want all the contents of the database
-field-aliases={identifier=citationkey},
-sort={en-GB},
+  src={~/Dropbox/localtexmf/bibtex/bib/minerals},
+  type=minerals,
+  %selection=all,  % select this if you want all the contents of the database
+  field-aliases={identifier=citationkey},
+  sort={en-GB},
 ]
 %    \end{macrocode}
-%  \end{macro}
 %
 %\subsection{Print the glossaries}
-%As mentioned above, produce the actual glossaries with
+%
+%As mentioned above, produce the actual glossaries with:
 %\begin{macro}{\printunsrtglossary}
 %\begin{itemize}
 %    \item \verb"\printunsrtglossary[type=plants]"

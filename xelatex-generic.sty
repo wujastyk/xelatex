@@ -195,46 +195,42 @@ Mapping=RomDev, %prefer slightly to iast
 %  \end{macro}
 
 % \subsection{Marginal note hacks}
-% Not used:
-%    \begin{macrocode}
-% \usepackage{marginfix}
-%    \end{macrocode}
-
-% simple marginal query, now superseded:
-%    \begin{macrocode}
-% \newcommand{\q}[1]{% 
-%    \marginpar{%
-%%        \rlap{%
-%            \fbox{\vtop{\hsize 0.2\textwidth\raggedright\tiny#1}}}}
-%            %}
-%    \end{macrocode}
 %
-% Actually, \verb|todonotes| makes nicer marginal comments:
-%  \begin{macro}{todonotes}
+% \begin{macro}{\q,todonotes}
+% I use \verb"\q{}" as a shorthand for putting a 
+% self-reminder in the margin. In my mind, it stands for 
+% ``query.'' At first, I defined \verb"\q" using
+% \verb"marginpar" (with \verb"marginfix"). Then I discovered
+% the \verb"todonotes" package by Henrik Midtiby, and that's 
+% what I use now. 
+%
+% Set up the parameters of \verb|\todo| notes to my liking:
 %    \begin{macrocode}
 \usepackage[colorinlistoftodos,
 %    disable,
-textsize=tiny,
-obeyDraft,
-textwidth=.11\textwidth,
-loadshadowlibrary,
-shadow,
-backgroundcolor=yellow
-]{todonotes}      
-    \setuptodonotes{fancyline}      
-
+  textsize=tiny,
+  obeyDraft,
+  textwidth=.11\textwidth,
+  loadshadowlibrary,
+  shadow,
+  backgroundcolor=yellow
+  ]{todonotes}      
+\setuptodonotes{fancyline}      
+%
 % Now renew the \q command to use \todo:
 \newcommand{\q}[1]{\todo{#1}}
-% \AtEndDocument{\newpage\listoftodos } %print the todo list 
-% at the end, 
-% when in draft mode
+%
+% Use the following if you want to print the todo list 
+% at the document's end, when in draft mode:
+% \AtEndDocument{\newpage\listoftodos } 
 %    \end{macrocode}
 %  \end{macro}
             
 % \subsection{Stacked diacritics}
+%
 %  \begin{macro}{\diatop}
 %%%% \verb|\diatop|, by Christina Thiele, 
-% used for r underdot overbar (ṝ, F6, 246)
+% used for r underdot overbar (ṝ, F6, 246, etc.)
 % See \emph{TeXniques: Conference Proceedings} 1987, no.\,5, p.\,11. 
 % (\url{https://tug.org/texniques/})
 %    \begin{macrocode}
