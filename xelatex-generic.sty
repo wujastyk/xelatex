@@ -190,7 +190,7 @@ Mapping=RomDev, %prefer slightly to iast
 %  \begin{macro}{csquotes,graphicx}
 %    \begin{macrocode}
 \usepackage[style=british]{csquotes} % error in log if not included
-\usepackage[final]{graphicx} % final = print even in a “draft” document
+\usepackage{graphicx} % final = print even in a “draft” document
 %    \end{macrocode}
 %  \end{macro}
 
@@ -209,7 +209,7 @@ Mapping=RomDev, %prefer slightly to iast
 \usepackage[colorinlistoftodos,
 %    disable,
   textsize=tiny,
-  obeyDraft,
+%  obeyDraft,  % turn off so that notes always display
   textwidth=.11\textwidth,
   loadshadowlibrary,
   shadow,
