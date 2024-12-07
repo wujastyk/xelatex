@@ -25,7 +25,7 @@ dashed=true,
 % I finally worked out how to sort cites by year and bibliography by name
 % 
 %\url{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
-sorting=ynt,  %ynt for the citations in date order; nyt otherwise
+% sorting=nyt,  % not needed here because it is implied by oxref style
 sortcites=true, 
 %sortlocale=en-GB,
 backref=false,
@@ -52,6 +52,54 @@ giveninits=false, % Give first names in the bibliography.  See
 %    \end{macrocode}
 % \end{macro}
 
+% \begin{macro}{\cites}
+% Here is a rewrite of the \verb|\cites| command that auto-sorts 
+% citations in the text into the required year-sequence.
+% It is copied blindly from 
+%\href{https://tex.stackexchange.com/questions/65809/sorting-citations-using-cites-command-in-biblatex}{the
+% Stackexchange post by Audrey and moewe}.
+% Just use \verb|\cites| as usual, putting your citation keys in any order,
+% and the output will print them in ascending date order.
+%
+%    \begin{macrocode}
+% original definition of \cites
+\DeclareMultiCiteCommand{\cbx@cites}{\cite}{\multicitedelim}
+
+% new definition
+\DeclareMultiCiteCommand{\cites}[\cbx@cite@wrapper\cbx@cites]{\cbx@cite}{}
+
+% first pass saves keys, prenotes, postnotes
+\DeclareCiteCommand{\cbx@cite}
+{\csxdef{prenote:\thefield{entrykey}}{\thefield{prenote}}}
+{\listxadd\cbx@savekeys{\thefield{entrykey}}}
+{}
+{\csxdef{postnote:\thefield{entrykey}}{\thefield{postnote}}}
+
+% second pass outputs sorted citation list
+\newrobustcmd{\cbx@cite@wrapper}[2]{%
+    \def\cbx@savekeys{}%
+    \def\cbx@citecall{#1}%
+    #2\cbx@sortkeysinit\cbx@citesort\cbx@citecall}
+
+% internal list of saved keys => sorted argument list
+\def\cbx@citesort{%
+    \def\do##1{%
+        \ifinlist{##1}{\cbx@savekeys}
+        {\protected@xappto\cbx@citecall{%
+                [\csuse{prenote:##1}][\csuse{postnote:##1}]{##1}}}
+        {}}%
+    \dolistloop{\cbx@sortkeys}}
+
+% internal list of sorted entry keys
+\def\cbx@sortkeysinit{%
+    \ifcsundef{blx@dlist@entry@\the\c@refsection @\blx@refcontext@context}
+    {}
+    {\global\csletcs{cbx@sortkeys}{blx@dlist@entry@\the\c@refsection 
+    @\blx@refcontext@context}}}
+\def\cbx@sortkeys{}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{Some options for all the main entry types}
 % \begin{macro}{\ExecuteBibliographyOptions}
 %    \begin{macrocode}
@@ -117,17 +165,10 @@ mvreference]{useeditor=true,
 %    \end{macro}
 %
 
-% \subsection{Sort citations and bibliography differently - fail!}
-%    \begin{macro}{\assignrefcontextentries}
-% I finally discovered how to sort citations by year and bibliography entries by name
-% (and see sorting, above).
-% 
+% \subsection{Sort citations and bibliography differently}
+% I finally discovered how to sort citations by year and bibliography entries 
+% by name  (and see sorting, above). See \\
 %\url{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
-%    \begin{macrocode}
-\AtBeginDocument{\assignrefcontextentries[]{*}}  
-%    \end{macrocode}
-% But this isn't working 2021-05 :-(
-%    \end{macro}
 %
 
 % \subsection{Placement of commas inside title quotes}
