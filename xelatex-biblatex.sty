@@ -7,8 +7,9 @@
 \usepackage[%
 backend=biber,
 %style=authoryear-icomp,
-% Make idem and ibidem behave appropriately:
-%\url{https://tex.stackexchange.com/questions/61717/biblatex-strictly-identical-footnote-citations-following-each-other}
+% Make idem and ibidem behave appropriately, following
+%\href{https://tex.stackexchange.com/questions/61717/biblatex-strictly-identical-footnote-citations-following-each-other}
+% {Stackexchange}
 % (and see \newbibmacro*{cite:ibid} below).
 %ibidpage,
 %idemtracker=false,
@@ -24,7 +25,8 @@ dashed=true,
 %
 % I finally worked out how to sort cites by year and bibliography by name
 % 
-%\url{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
+%\href{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
+% {my Cikitsā blog}. 
 % sorting=nyt,  % not needed here because it is implied by oxref style
 sortcites=true, 
 %sortlocale=en-GB,
@@ -44,7 +46,8 @@ urldate=short,
 usetranslator=true,
 useprefix=true,% van Nooten
 giveninits=false, % Give first names in the bibliography.  See 
-%\url{https://github.com/alex-ball/biblatex-oxref/issues/17#issuecomment-843383550}
+%\href{https://github.com/alex-ball/biblatex-oxref/issues/17#issuecomment-843383550}
+% {Alex Ball's discussion at Github}.
 %maxnames=1, % before “et al.”
 %uniquelist=false,
 %refsection=section,
@@ -52,6 +55,21 @@ giveninits=false, % Give first names in the bibliography.  See
 %    \end{macrocode}
 % \end{macro}
 
+
+% \begin{macro}{\mkvolroman}
+% Here is a redefinition of \verb|volume| numbers 
+% in multivolume and other bibliography entries, to be 
+% arabic digits, not small roman numerals. 
+%
+% This was kindly supplied by Alex Ball, author of biblatex-oxref,
+% as a 
+%\href{https://github.com/alex-ball/biblatex-oxref/issues/23#issuecomment-2592254113}{GitHub
+% issue answer}.
+%    \begin{macrocode}
+\renewcommand*{\mkvolroman}[1]{\bibsstring{volume}\addnbspace#1}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\cites}
 % Here is a rewrite of the \verb|\cites| command that auto-sorts 
 % citations in the text into the required year-sequence.
@@ -124,8 +142,8 @@ mvreference]{useeditor=true,
 % \subsection{Fix date abbreviations to be more verbose}
 %    \begin{macro}{\blx@ox@compyear}
 % Patch so that date-abbreviations aren't just one digit.
-% Kindly supplied by Alex Ball, 
-%\url{https://github.com/alex-ball/biblatex-oxref/issues/19}
+%\href{https://github.com/alex-ball/biblatex-oxref/issues/19}{Kindly supplied 
+%by Alex Ball at GitHub}.
 %    \begin{macrocode}
 \renewcommand{\blx@ox@compyear}[2]{%
     \def\num@one{#1}%
@@ -152,10 +170,10 @@ mvreference]{useeditor=true,
 
 % \subsection{Not used}
 %    \begin{macro}{bookeditor}
-%  I don't use this, now.
-%  patch of Sept 2019 
+%  I don't use this, now. patch of Sept 2019 
 % 
-%\url{https://mail.google.com/mail/u/0/#inbox/FMfcgxwDrHpMnGSkkqjMqHwCCdJqBLkC}
+%\href{https://mail.google.com/mail/u/0/#inbox/FMfcgxwDrHpMnGSkkqjMqHwCCdJqBLkC}
+% {personal email}.
 %    \begin{macrocode}
 %\makeatletter
 %\xpatchbibmacro{bookeditor}{\global\undef\bbx@lasthash}{}{}{%
@@ -167,8 +185,9 @@ mvreference]{useeditor=true,
 
 % \subsection{Sort citations and bibliography differently}
 % I finally discovered how to sort citations by year and bibliography entries 
-% by name  (and see sorting, above). See \\
-%\url{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
+% by name  (and see sorting, above). See 
+%\href{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
+% {my Cikitsā blog}.
 %
 
 % \subsection{Placement of commas inside title quotes}
@@ -316,8 +335,9 @@ mvreference]{useeditor=true,
 %  To make Bib\LaTeX\  notes print last, like addendums.
 %
 %    \begin{macro}{\DeclareSourcemap}
-% From\\ 
-%\url{http://tex.stackexchange.com/questions/138913/how-to-move-the-field-note-at-the-end-of-the-reference}
+% From
+%\href{http://tex.stackexchange.com/questions/138913/how-to-move-the-field-note-at-the-end-of-the-reference}
+% {Stackexchange}.
 %    \begin{macrocode}
 \DeclareSourcemap{
     \maps[datatype=bibtex]{
@@ -345,7 +365,8 @@ mvreference]{useeditor=true,
 
 % \subsection{Suppress shorthands.  Not used}
 %    \begin{macro}{\clearfield}
-% Suppress shorthands: \url{http://tex.stackexchange.com/questions/57041/}
+% Suppress shorthands: \href{http://tex.stackexchange.com/questions/57041/}
+% {From Stackexchange}.
 % 
 % Once again, I don't use this at present.
 %    \begin{macrocode}
@@ -384,9 +405,10 @@ mvreference]{useeditor=true,
 % \subsection{Width of shorthand abbreviations}
 %    \begin{macro}{\DeclareFieldFormat}
 %
-% Some magic from “moewe” at \\
-%\url{https://tex.stackexchange.com/questions/442749/biblatex-have-hyperref-links-point-to-the-shorthand-list}
-% \\that makes hyperlinks from citations point to the list of abbreviations.
+% Some magic from “moewe” at 
+%\href{https://tex.stackexchange.com/questions/442749/biblatex-have-hyperref-links-point-to-the-shorthand-list}
+% {Stackexchange},
+% that makes hyperlinks from citations point to the list of abbreviations.
 %    \begin{macrocode}
 \DeclareFieldFormat{shorthandwidth}{%
     \bibhypertarget{shorthand:\thefield{entrykey}}
@@ -422,7 +444,8 @@ mvreference]{useeditor=true,
 % content of the title field. 
 %
 % Thanks to emilianoeheyns at 
-%\url{https://forums.zotero.org/discussion/110863/biblatex-both-langid-and-language-are-needed}
+%\href{https://forums.zotero.org/discussion/110863/biblatex-both-langid-and-language-are-needed}
+% {the Zotero discussion forum}.
 %    \begin{macrocode}    
 \DeclareBibliographyDriver{literal}{%
     \newunit\newblock
