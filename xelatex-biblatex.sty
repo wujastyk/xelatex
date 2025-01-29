@@ -269,10 +269,10 @@ mvreference]{useeditor=true,
     {\nolinkurl{#1}}}
 %
 \DeclareFieldFormat{eprint:ark}{%
-	\textsc{ark:}\space
-	\ifhyperref  
-	{\href{https://n2t.net/#1}{\nolinkurl{#1}}}
-	{\nolinkurl{#1}}}
+    \textsc{ark}\addcolon\space
+    \ifhyperref
+    {\href{https://ark.archive.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
 %
 \DeclareFieldFormat{eprint:archive}{%
 %    Internet Archive\addcolon\space
