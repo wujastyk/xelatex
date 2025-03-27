@@ -19,10 +19,24 @@
 % 
 %\url{https://tex.stackexchange.com/questions/49788}.
 %  \begin{macro}{hyperref,pdfx,url}
+%The \verb|hyperref| documentation, section “6 Additional user macros,”
+%notes that,
+%\begin{quote}
+%    If the behaviour or the original \verb|\url| is needed, the \verb|url| package 
+%should be loaded first and the [\verb|\href{}{}|]command should be copied into 
+%some alias command.
+%\end{quote}
+%If you want \verb|hyperref|'s \verb|\href{}{}| to use \emph{ordinary}
+%\verb|\url{}| in its arguments, you need to do this jiggery-pokery. 
+%Only normal \verb|\url{}| knows how to break long URL strings, so this
+%is the only way to get an \verb|\href{}{}| command that does the
+%URL-breaking that we need in bibliographies.  Not yet successfully implemented.
+% So for breaking, use ordinary \url.
 %    \begin{macrocode}
 \RequirePackage[hyphens]{url}
-%\usepackage[final=true,hyphens]{hyperref}
-%\usepackage[a-1b]{pdfx} % get an archival PDF
+% 
+\usepackage[final=true]{hyperref}
+%\usepackage[a-1b]{pdfx} % get an archival PDF; not usable yet
 %    \end{macrocode}
 %  \end{macro}
 
@@ -311,13 +325,14 @@ Mapping=RomDev, %prefer slightly to iast
 %    \begin{macrocode}
 % \usepackage{makeidx} % leave this to xelatex-indexing.sty
 %    \end{macrocode}
-%  \begin{environment}{multicol,longtable,array}
+%  \begin{environment}{multicol,longtable,array,booktabs}
 %    \begin{macrocode}
 \usepackage{multicol}
 % \multicolsep = 12pt plus 4pt minus 3pt % default
 \multicolsep = 1pt plus .25ex % like the starred environments
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{booktabs}
 % \usepackage{index}    % multiple indexes. Doesn't play well with Beamer
 \widowpenalty 4000
 \clubpenalty 300
