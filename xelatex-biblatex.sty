@@ -70,54 +70,7 @@ giveninits=false, % Give first names in the bibliography.  See
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\cites}
-% Here is a rewrite of the \verb|\cites| command that auto-sorts 
-% citations in the text into the required year-sequence.
-% It is copied blindly from 
-%\href{https://tex.stackexchange.com/questions/65809/sorting-citations-using-cites-command-in-biblatex}{the
-% Stackexchange post by Audrey and moewe}.
-% Just use \verb|\cites| as usual, putting your citation keys in any order,
-% and the output will print them in ascending date order.
-%
-%    \begin{macrocode}
-% original definition of \cites
-\DeclareMultiCiteCommand{\cbx@cites}{\cite}{\multicitedelim}
 
-% new definition
-\DeclareMultiCiteCommand{\cites}[\cbx@cite@wrapper\cbx@cites]{\cbx@cite}{}
-
-% first pass saves keys, prenotes, postnotes
-\DeclareCiteCommand{\cbx@cite}
-{\csxdef{prenote:\thefield{entrykey}}{\thefield{prenote}}}
-{\listxadd\cbx@savekeys{\thefield{entrykey}}}
-{}
-{\csxdef{postnote:\thefield{entrykey}}{\thefield{postnote}}}
-
-% second pass outputs sorted citation list
-\newrobustcmd{\cbx@cite@wrapper}[2]{%
-    \def\cbx@savekeys{}%
-    \def\cbx@citecall{#1}%
-    #2\cbx@sortkeysinit\cbx@citesort\cbx@citecall}
-
-% internal list of saved keys => sorted argument list
-\def\cbx@citesort{%
-    \def\do##1{%
-        \ifinlist{##1}{\cbx@savekeys}
-        {\protected@xappto\cbx@citecall{%
-                [\csuse{prenote:##1}][\csuse{postnote:##1}]{##1}}}
-        {}}%
-    \dolistloop{\cbx@sortkeys}}
-
-% internal list of sorted entry keys
-\def\cbx@sortkeysinit{%
-    \ifcsundef{blx@dlist@entry@\the\c@refsection @\blx@refcontext@context}
-    {}
-    {\global\csletcs{cbx@sortkeys}{blx@dlist@entry@\the\c@refsection 
-    @\blx@refcontext@context}}}
-\def\cbx@sortkeys{}
-%    \end{macrocode}
-% \end{macro}
-%
 % \subsection{Some options for all the main entry types}
 % \begin{macro}{\ExecuteBibliographyOptions}
 %    \begin{macrocode}
@@ -189,7 +142,54 @@ mvreference]{useeditor=true,
 %\href{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
 % {my Cikitsā blog}.
 %
+% \begin{macro}{\cites}
+% Here is a rewrite of the \verb|\cites| command that auto-sorts 
+% citations in the text into the required year-sequence.
+% It is copied blindly from 
+%\href{https://tex.stackexchange.com/questions/65809/sorting-citations-using-cites-command-in-biblatex}{the
+% Stackexchange post by Audrey and moewe}.
+% Just use \verb|\cites| as usual, putting your citation keys in any order,
+% and the output will print them in ascending date order.
+%
+%    \begin{macrocode}
+% original definition of \cites
+\DeclareMultiCiteCommand{\cbx@cites}{\cite}{\multicitedelim}
 
+% new definition
+\DeclareMultiCiteCommand{\cites}[\cbx@cite@wrapper\cbx@cites]{\cbx@cite}{}
+
+% first pass saves keys, prenotes, postnotes
+\DeclareCiteCommand{\cbx@cite}
+{\csxdef{prenote:\thefield{entrykey}}{\thefield{prenote}}}
+{\listxadd\cbx@savekeys{\thefield{entrykey}}}
+{}
+{\csxdef{postnote:\thefield{entrykey}}{\thefield{postnote}}}
+
+% second pass outputs sorted citation list
+\newrobustcmd{\cbx@cite@wrapper}[2]{%
+    \def\cbx@savekeys{}%
+    \def\cbx@citecall{#1}%
+    #2\cbx@sortkeysinit\cbx@citesort\cbx@citecall}
+
+% internal list of saved keys => sorted argument list
+\def\cbx@citesort{%
+    \def\do##1{%
+        \ifinlist{##1}{\cbx@savekeys}
+        {\protected@xappto\cbx@citecall{%
+                [\csuse{prenote:##1}][\csuse{postnote:##1}]{##1}}}
+        {}}%
+    \dolistloop{\cbx@sortkeys}}
+
+% internal list of sorted entry keys
+\def\cbx@sortkeysinit{%
+    \ifcsundef{blx@dlist@entry@\the\c@refsection @\blx@refcontext@context}
+    {}
+    {\global\csletcs{cbx@sortkeys}{blx@dlist@entry@\the\c@refsection 
+            @\blx@refcontext@context}}}
+\def\cbx@sortkeys{}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{Placement of commas inside title quotes}
 %    \begin{macro}{\DefineBibliographyExtras}
 % Following sections 3.10 and 4.7.5 of the Bib\LaTeX\ manual, 
@@ -207,7 +207,7 @@ mvreference]{useeditor=true,
 % document redefine \verb|\printbibliography| (from biblatex.sty):
 %    \begin{macrocode}
 \renewrobustcmd*{\printbibliography}{%
- \newrefcontext[sorting=nyt] % added this line
+    \newrefcontext[sorting=nyt] % added this line
     \begingroup
     \delimcontext{bib}%
     \edef\on@line{\on@line}%
@@ -258,7 +258,7 @@ mvreference]{useeditor=true,
 %
 \DeclareFieldFormat{url}{%
     \ifhyperref
-    {\\ \textsc{url: }\href{#1}{#1}} % added a newline to help with long URLs in PDFs
+    {\\ \textsc{url: }\href{#1}{#1}} % added a newline to help with long URLs
     {\textsc{url: }\nolinkurl{#1}}} %DW bug here
 %
 % Buddhist Digital Resource Center:
@@ -274,14 +274,15 @@ mvreference]{useeditor=true,
     {\href{https://ark.archive.org/#1}{\nolinkurl{#1}}}
     {\nolinkurl{#1}}}
 %
-\DeclareFieldFormat{eprint:archive}{%
-%    Internet Archive\addcolon\space
-    \ifhyperref
-%    {\href{http://archive.org/details/#1}{\nolinkurl{#1}}}
-    {\href{http://archive.org/details/#1}{{\small Internet Archive}}}
-    {\nolinkurl{#1}}}
-\DeclareFieldAlias{eprint:archive.org}{eprint:archive}
-\DeclareFieldAlias{eprint:Archive.org}{eprint:archive}
+% next superseded by eprint:ark
+%\DeclareFieldFormat{eprint:archive}{%
+%%    Internet Archive\addcolon\space
+%    \ifhyperref
+%%    {\href{http://archive.org/details/#1}{\nolinkurl{#1}}}
+%    {\href{http://archive.org/details/#1}{{\small Internet Archive}}}
+%    {\nolinkurl{#1}}}
+%\DeclareFieldAlias{eprint:archive.org}{eprint:archive}
+%\DeclareFieldAlias{eprint:Archive.org}{eprint:archive}
 
 \DeclareFieldFormat{eprint:academia}{%
 %    Academia.edu\addcolon\space
@@ -290,13 +291,15 @@ mvreference]{useeditor=true,
     {\nolinkurl{#1}}}
 \DeclareFieldAlias{eprint:academia.edu}{eprint:academia}
 
-\DeclareFieldFormat{eprint:dli}{%
-%    DLI\addcolon\space
-    \ifhyperref
-    {\href{http://www.dli.gov.in/cgi-bin/DBscripts/allmetainfo.cgi?barcode=#1/}{{\small 
-    Digital Library of India}}}
-    {\nolinkurl{#1}}}
-\DeclareFieldAlias{eprint:DLI}{eprint:dli}
+%\DeclareFieldFormat{eprint:dli}{%
+%%    DLI\addcolon\space
+%    \ifhyperref
+%    
+%{\href{http://www.dli.gov.in/cgi-bin/DBscripts/allmetainfo.cgi?barcode=#1/}{{\small
+% 
+%    Digital Library of India}}}
+%    {\nolinkurl{#1}}}
+%\DeclareFieldAlias{eprint:DLI}{eprint:dli}
 \DeclareFieldFormat{eprint:jstor}{%
     \ifhyperref
     {\href{http://www.jstor.org/stable/#1}{{\small JSTOR}}}
