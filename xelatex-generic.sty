@@ -30,12 +30,18 @@
 %\verb|\url{}| in its arguments, you need to do this jiggery-pokery. 
 %Only normal \verb|\url{}| knows how to break long URL strings, so this
 %is the only way to get an \verb|\href{}{}| command that does the
-%URL-breaking that we need in bibliographies.  Not yet successfully implemented.
+%URL-breaking that we need in bibliographies.  Not yet successfully 
+%implemented.
 % So for breaking, use ordinary \url.
+%
+% Set the PDF version to 2.0, following the recommendation at
+% 
+%\url{https://tex.stackexchange.com/questions/617970/xelatex-pdf-version-2-0}.
 %    \begin{macrocode}
 \RequirePackage[hyphens]{url}
 % 
-\usepackage[final=true]{hyperref}
+\usepackage[pdfversion=2.0,
+    final=true]{hyperref}
 %\usepackage[a-1b]{pdfx} % get an archival PDF; not usable yet
 %    \end{macrocode}
 %  \end{macro}
