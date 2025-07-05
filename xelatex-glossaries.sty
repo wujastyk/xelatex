@@ -121,6 +121,18 @@ section]{glossaries-extra}
 }
 %    \end{macrocode}
 %
+% \begin{macro}{\glssilententry}
+% A version of the main \verb'\gls' command that prints nothing in the text, but
+% adds an entry and page reference to the glossary.
+%    \begin{macrocode}
+%\newcommand{\glssilententry}[1]{%
+%%\glossentryname{#1}%
+%\space (\emph{\the\glslabeltok{#1}})%
+%\ifglshasdesc{#1}{\space \glossentrydesc{#1}\glspostdescription}{}%
+%}
+%    \end{macrocode}
+%
+% \begin{macro}{\glsxtrbookindexprelocation}
 % Get rid of that pesky pre-comma.
 % (glossaries-extra.pdf manual, section 8.7.1, p.446):
 %  \begin{macrocode}
