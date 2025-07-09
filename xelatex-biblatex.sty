@@ -259,19 +259,30 @@ mvreference]{useeditor=true,
 \DeclareFieldFormat{url}{%
     \ifhyperref
     {\\ \textsc{url: }\href{#1}{#1}} % added a newline to help with long URLs
+    % else
     {\textsc{url: }\nolinkurl{#1}}} %DW bug here
 %
-% Buddhist Digital Resource Center:
+% Tibetan Buddhist Resource Center (before 2024):
 \DeclareFieldFormat{eprint:tbrc}{%
     \textsc{TBRC}\space
     \ifhyperref  
     {\href{https://www.tbrc.org/\#!rid=#1}{\nolinkurl{#1}}}
+    % else
+    {\nolinkurl{#1}}}
+%
+% Buddhist Digital Resource Center permalinks:
+\DeclareFieldFormat{eprint:bdrc}{%
+    \textsc{BDRC}\space
+    \ifhyperref  
+    {\href{https://purl.bdrc.io/resource/#1}{\nolinkurl{#1}}}
+    % else
     {\nolinkurl{#1}}}
 %
 \DeclareFieldFormat{eprint:ark}{%
     \textsc{ark}\addcolon\space
     \ifhyperref
     {\href{https://ark.archive.org/#1}{\nolinkurl{#1}}}
+    % else
     {\nolinkurl{#1}}}
 %
 % next superseded by eprint:ark
@@ -288,6 +299,7 @@ mvreference]{useeditor=true,
 %    Academia.edu\addcolon\space
     \ifhyperref
     {\href{http://www.academia.edu/#1}{{\small Academia.edu}}}
+    % else
     {\nolinkurl{#1}}}
 \DeclareFieldAlias{eprint:academia.edu}{eprint:academia}
 
@@ -303,6 +315,7 @@ mvreference]{useeditor=true,
 \DeclareFieldFormat{eprint:jstor}{%
     \ifhyperref
     {\href{http://www.jstor.org/stable/#1}{{\small JSTOR}}}
+    % else
     {\nolinkurl{#1}}}
 
 \DeclareFieldFormat{eprint:google}{%
@@ -314,6 +327,7 @@ mvreference]{useeditor=true,
     \textsc{doi}\addcolon\space
     \ifhyperref
     {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+    % else
     {\nolinkurl{#1}}}
 %
 \fi
