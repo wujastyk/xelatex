@@ -11,7 +11,7 @@
 %
 %See 
 %\begin{itemize}
-%    \item  \url{https://ctan.org/pkg/glossaries}
+%    \item  \url{https://;ctan.org/pkg/glossaries}
 %    \item \url{https://ctan.org/pkg/glossaries-extra}
 %    \item \url{https://ctan.org/pkg/bib2gls}
 %\end{itemize}
@@ -53,35 +53,36 @@
 % \href{http://jabref.org}{JabRef} to manage my databases and it adds the 
 % \verb"citationkey =" by itself.  It does no harm.
 %
-%The citation keys in the databases, e.g., \verb"māṃsī", is used as the 
+% The citation keys in the databases, e.g., \verb"māṃsī", is used as the 
 % argument of the macro
-%\verb"\gls{}" in your document. It may contain diacritical marks.  For 
-%example, you 
-%write “The plant is \verb"\gls{māṃsī}"” and your out put PDF will print “The 
-%plant is 
-%spikenard”.  The macro \verb"\gls" has looked up “māṃsī” in plants.bib and 
-%replaced 
-%it with the name “spikenard”.  At the same time, the entry “spikenard” is 
-%written to the glossary at the end of your document, giving the name 
-%“māṃsī” 
-%and then the contents of the description field from \verb"plants.bib". 
+% \verb"\gls{}" in your document. It may contain diacritical marks.  For 
+% example, you 
+% write “The plant is \verb"\gls{māṃsī}"” and your out put PDF will print “The 
+% plant is 
+% spikenard”.  The macro \verb"\gls" has looked up “māṃsī” in plants.bib and 
+% replaced 
+% it with the name “spikenard”.  At the same time, the entry “spikenard” is 
+% written to the glossary at the end of your document, giving the name 
+% “māṃsī” 
+% and then the contents of the description field from \verb"plants.bib". 
 %
 % \subsection{Singular, plural, capitalized}
-%The command \verb"\glspl{}" produces the plural (“spikenards”).  The 
-%command 
-%\verb"\Gls{}" capitalizes the ouput (“Spikenard”).  \verb"\Glspl{}" \ldots\  
-%(“Spikenards”).  If the 
-%plural isn't composed with suffix s, you can add a field 
-% “\verb"plural ="“ to the 
-%\verb"plants.bib" database giving the plural form.  (So, with 
+%
+% The command \verb"\glspl{}" produces the plural (“spikenards”).  The 
+% command 
+% \verb"\Gls{}" capitalizes the ouput (“Spikenard”).  \verb"\Glspl{}" \ldots\  
+% (“Spikenards”).  If the 
+% plural isn't composed with suffix -s, you can add a field 
+% ``\verb"plural ="'' to the 
+% \verb"plants.bib" database giving the plural form.  (So, with 
 % \verb"plural=mongeese," \verb"\Glspl{nakula}" prints “Mongeese”.)  
 %
-%The glossaries at the end of your document are produced by the commands
-%\begin{itemize}
+% The glossaries at the end of your document are produced by the commands
+% \begin{itemize}
 %    \item \verb"\printunsrtglossary[type=plants]"
 %    \item \verb"\printunsrtglossary[type=animals]"
 %    \item \verb"\printunsrtglossary[type=minerals]"
-%\end{itemize}
+% \end{itemize}
 %
 %  \begin{macro}{glossaries-extra.sty}
 %    \begin{macrocode}
