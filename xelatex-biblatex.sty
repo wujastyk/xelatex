@@ -2,7 +2,8 @@
 % \subsection{Load the basic package with options}
 %    \begin{macro}{biblatex.sty}
 %  Load the Bib\LaTeX\ package and
-% the \verb|oxyear| style, and set the various options.
+% the \verb|oxyear| style, and set the various options.  For sorting issues, see
+% p.\pageref{sorting} below.
 %    \begin{macrocode}
 \usepackage[%
 backend=biber,
@@ -28,7 +29,7 @@ dashed=true,
 %\href{https://cikitsa.blogspot.ca/2017/07/biblatex-citations-and-bibliography.html}
 % {my Cikitsā blog}. 
 % sorting=nyt,  % not needed here because it is implied by oxref style
-sortcites=true, 
+%sortcites=true, % see above blog
 %sortlocale=en-GB,
 backref=false,
 date=comp,
@@ -54,8 +55,7 @@ giveninits=false, % Give first names in the bibliography.  See
 ]{biblatex}
 %    \end{macrocode}
 % \end{macro}
-
-
+%
 % \begin{macro}{\mkvolroman}
 % Here is a redefinition of \verb|volume| numbers 
 % in multivolume and other bibliography entries, to be 
@@ -201,6 +201,7 @@ mvreference]{useeditor=true,
 %
 
 % \subsection{Sorting the bibliography}
+% \label{sorting}
 %    \begin{macro}{\printbibliography}
 % To avoid saying \verb|\newrefcontext[sorting=nyt]| before
 % \verb|\printbibliography| in every 
@@ -217,7 +218,6 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-
 % \subsection{String abbreviations}
 %    \begin{macro}{volcite}
 % no ``p.'' or ``pp." in, for example, \verb|\volcite|:
