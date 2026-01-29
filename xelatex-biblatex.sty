@@ -16,7 +16,7 @@ backend=biber,
 %idemtracker=false,
 %style=authoryear,
 %uniquename=false,
-% oxref:
+% begin oxref:
 style=oxyear,
 dashed=true,
 % end oxref
@@ -49,9 +49,12 @@ useprefix=true,% van Nooten
 giveninits=false, % Give first names in the bibliography.  See 
 %\href{https://github.com/alex-ball/biblatex-oxref/issues/17#issuecomment-843383550}
 % {Alex Ball's discussion at Github}.
-%maxnames=1, % before “et al.”
 %uniquelist=false,
 %refsection=section,
+maxcitenames=4,
+mincitenames=3,
+maxbibnames=3, % before “et al.”  
+minbibnames=3,
 ]{biblatex}
 %    \end{macrocode}
 % \end{macro}
@@ -86,8 +89,8 @@ collection,
 reference,
 mvreference]{useeditor=true,
     usetranslator=true,
-%    uniquename=full
-}
+    uniquename=full, % disambiguate using initials or full names, as required
+    }
 %    \end{macrocode}
 %    \end{macro}
 %
