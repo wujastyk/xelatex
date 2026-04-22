@@ -1,0 +1,80 @@
+% XeLaTeX multilingual fonts and bibliography support
+%\usepackage{xetex-generic-biblatex}
+\usepackage{polyglossia} %\usepackage{fontspec}
+
+\usepackage{xelatex-biblatex}
+\addbibresource{biblio4-utf8.bib}
+
+\setdefaultlanguage[variant=british]{english}
+\setotherlanguage{sanskrit}
+
+\setmainfont{DejaVu Sans}
+
+% Now define the Devanagari font:
+% input using standard IAST transliteration
+\newfontfamily\devanagarifont
+[Script=Devanagari,
+FakeStretch=1.05,
+Mapping=RomDev, %prefer slightly to iast
+]
+%{Sahadeva}
+%{Shobhika} 
+{Tiro Devanagari Sanskrit}
+%{Sanskrit 2003}
+%\newcommand{\dev}[1]{\textdevanagari{#1}} % test this 2018-10
+\newcommand{\dev}[1]{\textsanskrit{\devanagarifont #1}} % test this 2020-01
+
+ % beamer choices:
+\hypersetup{pdfpagemode=UseNone} %FullScreen
+\usetheme {Pittsburgh}
+%{Madrid}
+\usecolortheme{wolverine}  
+%{crane}
+
+%https://tex.stackexchange.com/questions/686/how-to-get-rid-of-navigation-symbols-in-beamer
+\beamertemplatenavigationsymbolsempty
+% or this: \setbeamertemplate{navigation symbols}{}
+
+%% from beamer documentation, for printing out:
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[letterpaper]
+%
+
+\usepackage{multicol}
+
+
+%\newcommand{\dev}[1]{{\sanskritfont #1}}
+
+% DW internal shortcuts etc. 
+%\newcommand{\saneng}[2]{#2}
+\newcommand{\saneng}[2]{#2 (\emph{#1})}
+\let\se\saneng
+\newcommand{\CClogo}{%
+    \includegraphics[height=2ex]
+    {/home/dom/Dropbox/localtexmf/tex/graphics/CCASA-license-88x31}%
+    %\href{http://creativecommons.org/licenses/by-sa/3.0/deed.en_GB}{licence}
+}
+
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+\pgfdeclareimage[height=0.5cm]{ualberta-logo}{ualberta-colour-logo}
+ \logo{\pgfuseimage{ualberta-logo}}
+
+\newcommand\CE{{\small CE}}
+\institute[University of Alberta]{Department of History and Classics\\
+  University of Alberta\\[1ex] \CClogo }
+
+
+\AtEndDocument{
+%    \begin{frame} %[allowframebreaks=1]
+%        {Bibliography}
+        \renewcommand{\bibfont}{\tiny }
+        \printbibliography
+%\end{frame}
+}
+
