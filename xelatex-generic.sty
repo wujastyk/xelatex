@@ -18,41 +18,8 @@
 % Commented out, except for url, for which  see
 % 
 %\url{https://tex.stackexchange.com/questions/49788}.
-% \subsection{Multilingual macros}
-% from:
-%\href{http://tex.stackexchange.com/questions/38607/no-room-for-a-new-dimen/38609#38609}
-%{Stackexchange}.
-%
-%  \begin{macro}{etex}
-% Not used
-%    \begin{macrocode}
-%\usepackage{etex}
-%\reserveinserts{28}
-%\usepackage{xcolor}
-%    \end{macrocode}
-%  \end{macro}
-%
-%  \begin{macro}{polyglossia}
-% Set up various fonts  and languages. To be loaded before \verb|hyperref|.
-%    \begin{macrocode}
-\usepackage{polyglossia} 
-%% work around a bug in polyglossia
-%% from https://github.com/reutenauer/polyglossia/issues/626
-%\makeatletter
-%\ExplSyntaxOn
-%\pretocmd\xpg@set@alias@values{%
-%    \prop_if_exist:cF { xpg@alias@keyvals@#1@#4 }
-%    { \prop_new:c {xpg@alias@keyvals@#1@#4} }
-%}{}{}
-%\ExplSyntaxOff
-%\makeatother
-%% end of workaround
-%
 %  \begin{macro}{hyperref,pdfx,url}
-% To be loaded after \verb|polyglossia|.
-%
-% The \verb|hyperref| documentation, 
-% section “6 Additional user macros,”
+%The \verb|hyperref| documentation, section “6 Additional user macros,”
 %notes that,
 %\begin{quote}
 %    If the behaviour or the original \verb|\url| is needed, the \verb|url| package 
@@ -71,22 +38,50 @@
 % 
 %\url{https://tex.stackexchange.com/questions/617970/xelatex-pdf-version-2-0}.
 %    \begin{macrocode}
-%\RequirePackage[hyphens]{url}
+\RequirePackage[hyphens]{url}
 % 
-\usepackage[
-    % the following two options cause option clashes with hyperref
-    %pdfversion=2.0,
-    %final=true
-    ]{hyperref}
+\usepackage[pdfversion=2.0,
+    final=true]{hyperref}
 %\usepackage[a-1b]{pdfx} % get an archival PDF; not usable yet
 %    \end{macrocode}
 %  \end{macro}
+
+% \subsection{Multilingual macros}
+% from:
+%\href{http://tex.stackexchange.com/questions/38607/no-room-for-a-new-dimen/38609#38609}
+%{Stackexchange}.
 %
+%  \begin{macro}{etex}
+% Not used
+%    \begin{macrocode}
+%\usepackage{etex}
+%\reserveinserts{28}
+%\usepackage{xcolor}
+%    \end{macrocode}
+%  \end{macro}
+%
+%  \begin{macro}{polyglossia}
+% Set up various fonts  and languages.
+%    \begin{macrocode}
+\usepackage{polyglossia} 
+%% work around a bug in polyglossia
+%% from https://github.com/reutenauer/polyglossia/issues/626
+%\makeatletter
+%\ExplSyntaxOn
+%\pretocmd\xpg@set@alias@values{%
+%    \prop_if_exist:cF { xpg@alias@keyvals@#1@#4 }
+%    { \prop_new:c {xpg@alias@keyvals@#1@#4} }
+%}{}{}
+%\ExplSyntaxOff
+%\makeatother
+%% end of workaround
+
 \defaultfontfeatures{%
   Mapping=tex-text,
   %Color=red,
   Numbers=OldStyle,
 } 
+
 \setmainlanguage[variant=british]{english}
 %    \end{macrocode}
 
@@ -126,6 +121,7 @@
 % {Brill} %Transliteration only in this font
 % {Sanskrit 2003} % Roman and Devanagari
 %    \end{macrocode}
+
 
 % Define \verb|\sansk{}| which is the same as \verb|\emph{}|, except that it 
 % causes 
@@ -323,19 +319,13 @@ Mapping=RomDev, %prefer slightly to iast
 \setcounter{secnumdepth}{0}
 %    \end{macrocode}
 %
-%  \begin{macro}{item}
-% Some preferences for the \verb|itemize| environment.
-% This package nixes the bullets in \verb|beamer|
+%  \begin{macro}{enumitem}
 %    \begin{macrocode}
-\@ifclassloaded{beamer}{%
-    % Do nothing if beamer is loaded to avoid bullet suppression
-}{%
-    % Load enumitem only for non-beamer classes (like article or book)
 \usepackage[inline]{enumitem} 		% supersedes mdwlist: does it globally
  \setlist{itemsep=.5em,
      %labelindent=\parindent,
      %leftmargin=*,
- }}
+ }
 %    \end{macrocode}
 %  \end{macro}
 %
