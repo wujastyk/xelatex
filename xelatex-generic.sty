@@ -153,7 +153,8 @@ Mapping=RomDev, %prefer slightly to iast
 
 %    \begin{macrocode}
 % \newcommand{\dev}[1]{\textdevanagari{#1}} % test this 2018-10
-\newcommand{\dev}[1]{\textsanskrit{\devanagarifont #1}} % test this 2020-01
+\newcommand{\dev}[1]{{\textsanskrit{\devanagarifont #1}}} % test this 
+%2020-01
 \let\dsan=\devanagarifont
 \let\dn=\devanagarifont
 
@@ -195,7 +196,7 @@ Mapping=RomDev, %prefer slightly to iast
 %
 %  \end{macro} 
 % End of polyglossia stuff.
-
+%
 % \subsection{Sanskrit hyphenation}
 %  \begin{macro}{hyphenations}
 %  A cumulative hyphenation exception file, \verb|sanskrit-hyphenations.tex|,
