@@ -123,21 +123,6 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-% \subsection{Not used}
-%    \begin{macro}{bookeditor}
-%  I don't use this, now. patch of Sept 2019 
-% 
-%\href{https://mail.google.com/mail/u/0/#inbox/FMfcgxwDrHpMnGSkkqjMqHwCCdJqBLkC}
-% {personal email}.
-%    \begin{macrocode}
-%\makeatletter
-%\xpatchbibmacro{bookeditor}{\global\undef\bbx@lasthash}{}{}{%
-%    \wlog{INFO: oxyear fix no longer needed!}}
-%\makeatother
-%    \end{macrocode}
-%    \end{macro}
-%
-
 % \subsection{Sort citations and bibliography differently}
 % I finally discovered how to sort citations by year and bibliography entries 
 % by name  (and see sorting, above). See 
@@ -368,7 +353,7 @@ mvreference]{useeditor=true,
     }
 }
 %    \end{macrocode}
-%    \end{macro}
+%    \end{macro}                   
 %
 
 % \subsection{Tweak the punctuation of citations}
@@ -405,7 +390,7 @@ mvreference]{useeditor=true,
 % \subsection{Hacks for pubstate}
 %    \begin{macro}{\DeclareLabeldate}
 % Bib\LaTeX\  hacks to get pubstate (?forthcoming? etc.) behaving as it should
-% Bib\LaTeX\  manual 4.5.10
+% Bib\LaTeX\  manual 4.5.10 
 %    \begin{macrocode}
 \DeclareLabeldate{%
 	\field{date}
@@ -494,7 +479,7 @@ mvreference]{useeditor=true,
 % Strangely, this package has to be loaded after 
 % many of the biblatex commands above.  This ensures that 
 % a "Bad character code (2097151)" error doesn't arise 
-% when \XeLaTeX\ tries to \verb|\resetMathstrut@|.
+% when Xe\LaTeX\ tries to \verb|\resetMathstrut@|.
 %
 % \begin{macro}{unicode-math}
 %    \begin{macrocode}

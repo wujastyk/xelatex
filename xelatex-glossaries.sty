@@ -114,13 +114,14 @@ section]{glossaries-extra}
 % See % glossaries-extra.pdf manual, section 8.7.1, p.443
 %
 %  \begin{macro}{\glsxtrbookindexname}
-%  \begin{macrocode}
+%   \begin{macrocode}
 \renewcommand*{\glsxtrbookindexname}[1]{%
     \glossentryname{#1}%
     \space (\emph{\the\glslabeltok{#1}})%
     \ifglshasdesc{#1}{\space \glossentrydesc{#1}\glspostdescription}{}%
 }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\glssilententry}
 % A version of the main \verb'\gls' command that prints nothing in the text, but
@@ -132,6 +133,7 @@ section]{glossaries-extra}
 %\ifglshasdesc{#1}{\space \glossentrydesc{#1}\glspostdescription}{}%
 %}
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\glsxtrbookindexprelocation}
 % Get rid of that pesky pre-comma.

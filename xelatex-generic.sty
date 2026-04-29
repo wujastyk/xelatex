@@ -47,16 +47,20 @@
 %\ExplSyntaxOff
 %\makeatother
 %% end of workaround
+%    \end{macrocode}
+% \end{macro}
 %
 %  \begin{macro}{hyperref,pdfx,url}
-% To be loaded after \verb|polyglossia|.
 %
+% To be loaded after \verb|polyglossia|.
 % The \verb|hyperref| documentation, 
 % section “6 Additional user macros,”
 %notes that,
 %\begin{quote}
-%    If the behaviour or the original \verb|\url| is needed, the \verb|url| package 
-%should be loaded first and the [\verb|\href{}{}|]command should be copied into 
+%    If the behaviour or the original \verb|\url| is needed, 
+% the \verb|url| package 
+% should be loaded first and the [\verb|\href{}{}|] command 
+% should be copied into 
 %some alias command.
 %\end{quote}
 %If you want \verb|hyperref|'s \verb|\href{}{}| to use \emph{ordinary}
@@ -65,56 +69,63 @@
 %is the only way to get an \verb|\href{}{}| command that does the
 %URL-breaking that we need in bibliographies.  Not yet successfully 
 %implemented.
-% So for breaking, use ordinary \url.
+% So for breaking, use ordinary \verb|\url|.
 %
 % Set the PDF version to 2.0, following the recommendation at
 % 
 %\url{https://tex.stackexchange.com/questions/617970/xelatex-pdf-version-2-0}.
 %    \begin{macrocode}
 %\RequirePackage[hyphens]{url}
-% 
 \usepackage[
     % the following two options cause option clashes with hyperref
     %pdfversion=2.0,
     %final=true
     ]{hyperref}
-%\usepackage[a-1b]{pdfx} % get an archival PDF; not usable yet
+% \usepackage[a-1b]{pdfx} % get an archival PDF; not usable yet
 %    \end{macrocode}
 %  \end{macro}
 %
+% \begin{macro}{fonts and features}
+%    \begin{macrocode}
 \defaultfontfeatures{%
-  Mapping=tex-text,
+  % Mapping=tex-text,
   %Color=red,
   Numbers=OldStyle,
-} 
+  } 
 \setmainlanguage[variant=british]{english}
 %    \end{macrocode}
 
 % Main document font:
 %    \begin{macrocode}
-% \setmainfont[AutoFakeBold=1.5]{EB Garamond 12}
-\setmainfont%[BoldFont = * Bold] % tlpretest 2019 
-% (See https://tug.org/pipermail/tex-live/2019-March/043211.html)
+\setmainfont 
 % {Linux Libertine O} % lovely, but use Libertinus
 % {fbb} % also lovely - Bembo, but no underdot
 % {Tinos} % a croscore font; good diacritics
 {TeX Gyre Pagella}
 % {IndUni-P}
 % {Lucida Sans Unicode}
-% {Libertinus Serif} % something funny with overlapping chars in bold 2019-05
+% {Libertinus Serif} % something funny with overlapping 
+% chars in bold 2019-05
 %    \end{macrocode}
+% \end{macro}
 
 % \subsection{Packages that Polyglossia now auto-loads}
-% polyglossia automatically loads: fixltx2e, etex, xunicode, fontspec.  
-% But we still need \verb|metalogo| for the definitions of logos like \verb|\XeLaTeX|.
+%
+% Polyglossia automatically loads: fixltx2e, etex, xunicode, fontspec.  
+% But we still need \verb|metalogo| for the definitions of logos like 
+% \verb|\XeLaTeX|.
+% \begin{macro}{metalogo}
+%
 %    \begin{macrocode}
 \usepackage{metalogo}
 % \usepackage{xunicode} % get unicode encoding in PDF even when using
 % \= etc.  Not needed at present.
 %    \end{macrocode}
-
+% \end{macro}
+%
 % Getting properly-hyphenated Sanskrit:
 %
+% \begin{macro}{setotherlanguage}
 %    \begin{macrocode}
 \setotherlanguage{sanskrit}  % for transliterated Sanskrit
 \newfontfamily\sanskritfont
@@ -165,7 +176,7 @@ Mapping=RomDev, %prefer slightly to iast
 %{Noto Serif Bengali}
 {Tiro Bangla}
 %    \end{macrocode}
-% Use: \verb|\textbengali{বান মাছ}|
+% Use: \verb|\textbengali{<Bangla text>}| %{বান মাছ}
 
 % And other languages
 %
@@ -193,7 +204,6 @@ Mapping=RomDev, %prefer slightly to iast
 {GFS Porson}
 %{GFS Philostratos}
 %    \end{macrocode}
-%
 %  \end{macro} 
 % End of polyglossia stuff.
 %
