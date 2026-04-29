@@ -123,7 +123,6 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-
 % \subsection{Not used}
 %    \begin{macro}{bookeditor}
 %  I don't use this, now. patch of Sept 2019 
@@ -382,7 +381,6 @@ mvreference]{useeditor=true,
 %    \end{macrocode}
 %    \end{macro}
 %
-
 % \subsection{Suppress shorthands.  Not used}
 %    \begin{macro}{\clearfield}
 % Suppress shorthands: \href{http://tex.stackexchange.com/questions/57041/}
@@ -485,12 +483,25 @@ mvreference]{useeditor=true,
 \DeclareSourcemap{
     \maps[datatype=bibtex]{
         \map{
-            \step[fieldsource=lanuage,fieldtarget=langid]
+            \step[fieldsource=language,fieldtarget=langid]
         }
     }
 }
 %    \end{macrocode}
 %    \end{macro}
+%
+% \subsection{Unicode math}
+% Strangely, this package has to be loaded after 
+% many of the biblatex commands above.  This ensures that 
+% a "Bad character code (2097151)" error doesn't arise 
+% when \XeLaTeX\ tries to \verb|\resetMathstrut@|.
+%
+% \begin{macro}{unicode-math}
+%    \begin{macrocode}
+\usepackage{unicode-math}
+%    \end{macrocode}
+% \end{macro}    
+%
 %  That's all, folks!
 %    
 \endinput
